@@ -15,7 +15,8 @@ class TareaController extends Controller
      */
     public function index()
     {
-        //
+        $tareas = Tarea::all();
+        return view('tarea.index', compact('tareas'));
     }
 
     /**
@@ -36,7 +37,8 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tarea::create($request->only('titulo'));
+        return redirect('/');
     }
 
     /**
@@ -58,7 +60,8 @@ class TareaController extends Controller
      */
     public function edit(Tarea $tarea)
     {
-        //
+        $tarea = Tarea::findOrFail($id);
+        return view('tareas.edit', compact('tarea'));
     }
 
     /**
@@ -70,7 +73,9 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
-        //
+        $tarea = Tarea::findOrFail($id);
+        $tarea->update($request->only('titulo', 'completada'));
+        return redirect('/');
     }
 
     /**
@@ -81,6 +86,8 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
-        //
+        $tarea = Tarea::findOrFail($id);
+        $tarea->delete();
+        return redirect('/');
     }
 }
