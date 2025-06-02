@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [TareaController::class, 'index']);
+Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index');
 Route::post('/tareas', [TareaController::class, 'store']);
 Route::get('/tareas/{id}/edit', [TareaController::class, 'edit']);
 Route::put('/tareas/{id}', [TareaController::class, 'update']);

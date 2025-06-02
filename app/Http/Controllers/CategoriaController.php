@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tarea;
+use App\Models\Categoria;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCategoriaRequest;
+use App\Http\Requests\UpdateCategoriaRequest;
 
-class TareaController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::all();
-        return view('tarea.index', compact('tareas'));
+        //
     }
 
     /**
@@ -32,22 +32,21 @@ class TareaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCategoriaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoriaRequest $request)
     {
-        Tarea::create($request->only('titulo'));
-        return redirect('/tareas');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarea $tarea)
+    public function show(Categoria $categoria)
     {
         //
     }
@@ -55,38 +54,34 @@ class TareaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tarea $tarea)
+    public function edit(Categoria $categoria)
     {
-        return view('tarea.edit', compact('tarea'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Http\Requests\UpdateCategoriaRequest  $request
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        $tarea = Tarea::findOrFail($id);
-        $tarea->update($request->only('titulo', 'completada'));
-        return redirect('/');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarea $tarea)
+    public function destroy(Categoria $categoria)
     {
-        $tarea = Tarea::findOrFail($id);
-        $tarea->delete();
-        return redirect('/');
+        //
     }
 }
