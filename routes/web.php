@@ -24,6 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index');
 Route::post('/tareas', [TareaController::class, 'store']);
-Route::get('/tareas/{id}/edit', [TareaController::class, 'edit']);
-Route::put('/tareas/{id}', [TareaController::class, 'update']);
-Route::delete('/tareas/{id}', [TareaController::class, 'destroy']);
+Route::get('/tareas/{tarea}/edit', [TareaController::class, 'edit'])->name('tareas.edit');
+Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.update');
+Route::delete('/tareas/{tarea}', [TareaController::class, 'destroy'])->name('tareas.destroy');

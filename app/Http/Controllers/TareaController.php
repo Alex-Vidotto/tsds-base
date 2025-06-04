@@ -72,9 +72,8 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
-        $tarea = Tarea::findOrFail($id);
         $tarea->update($request->only('titulo', 'completada'));
-        return redirect('/');
+        return redirect('/tareas');
     }
 
     /**
@@ -85,8 +84,7 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
-        $tarea = Tarea::findOrFail($id);
         $tarea->delete();
-        return redirect('/');
+        return redirect('/tareas');
     }
 }
