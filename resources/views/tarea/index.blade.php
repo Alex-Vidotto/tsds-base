@@ -14,7 +14,6 @@
                         </div>
                     @endif
 
-                    <!-- Acordeón principal con "Lista de Tareas" -->
                     <div class="accordion mb-2" id="mainAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingMain">
@@ -48,7 +47,6 @@
                         </div>
                     </div>
 
-                    <!-- Formulario para crear nueva tarea -->
                     <form action="/tareas" method="POST" class="d-flex gap-2">
                         @csrf
                         <input type="text" name="titulo" placeholder="Nueva tarea" class="form-control" required>
