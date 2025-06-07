@@ -27,7 +27,14 @@
                                         <ul class="list-group mb-3">
                                             @foreach($tareas as $tarea)
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <span>{{ $tarea->titulo }}</span>
+                                                    <span>{{ $tarea->id }} - {{ $tarea->titulo }}
+                                                        <br>
+                                                        <small class="text-muted">Creada: {{ $tarea->created_at->format('d/m/Y') }}
+                                                        @if($tarea->updated_at)
+                                                            | Actualizada: {{ $tarea->updated_at->format('d/m/Y') }}
+                                                        @endif
+                                                        </small>
+                                                    </span>
                                                     <span>
                                                         <a href="/tareas/{{ $tarea->id }}/edit" class="btn btn-outline-warning">Editar</a>
                                                         <form action="/tareas/{{ $tarea->id }}" method="POST" style="display:inline;">
