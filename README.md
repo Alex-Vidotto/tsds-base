@@ -64,3 +64,29 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## Configuración recomendada de PHP solucionar el problema gracias copilot
+
+Asegúrate de que tu terminal use el PHP de XAMPP.  
+Puedes verificarlo ejecutando:
+
+    where php
+
+El resultado debe mostrar primero:
+    C:\xampp\php\php.exe
+
+Si no es así, agrega temporalmente el PHP de XAMPP al PATH con:
+
+- En CMD:
+      set PATH=C:\xampp\php;%PATH%
+- En PowerShell:
+      $env:PATH = "C:\xampp\php;" + $env:PATH
+- En Git Bash:
+      export PATH="/c/xampp/php:$PATH"
+
+Luego verifica con:
+    php -m | findstr /I pdo
+
+Debe aparecer `pdo_mysql` en la lista.
