@@ -1,17 +1,28 @@
+
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <h1 class="display-4 text-dark text-shadow-inset">
-        Editar Tarea
-    </h1>
-    <form action="{{ route('tareas.update', $tarea->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <input type="text" name="titulo" value="{{ $tarea->titulo }}" required>
-        <button type="submit" class="btn btn-outline-success">
-            Guardar
-        </button>
-    </form>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Editar Tarea</div>
+                <div class="card-body">
+                   
+                <form action="{{ route('tareas.update', $tarea->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input class="form-control" type="text" name="titulo" value="{{ $tarea->titulo }}" required>
+                        <button type="submit" class="btn btn-outline-success">
+                            Guardar
+                        </button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
+
+
