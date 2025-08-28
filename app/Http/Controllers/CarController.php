@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tarea;
+use App\Models\Car;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCarRequest;
+use App\Http\Requests\UpdateCarRequest;
 
-class TareaController extends Controller
+class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $tareas = Tarea::all();
-        return view('tarea.index', compact('tareas'));
+        //
     }
 
     /**
@@ -32,22 +32,21 @@ class TareaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreCarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCarRequest $request)
     {
-        Tarea::create($request->only('titulo'));
-        return redirect('/tareas');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarea $tarea)
+    public function show(Car $car)
     {
         //
     }
@@ -55,36 +54,34 @@ class TareaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tarea $tarea)
+    public function edit(Car $car)
     {
-        return view('tarea.edit', compact('tarea'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Http\Requests\UpdateCarRequest  $request
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(UpdateCarRequest $request, Car $car)
     {
-        $tarea->update($request->only('titulo', 'completada'));
-        return redirect('/tareas');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarea $tarea)
+    public function destroy(Car $car)
     {
-        $tarea->delete();
-        return redirect('/tareas');
+        //
     }
 }
