@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('car_models', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('foto')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('nombre')->unique();
+            $table->foreignId('car_brand_id')
+                    ->constrained('car_brands') // Indica la tabla referenciada, si esta vacio y el metodo esta en ingles, toma el nombre de la tabla en plural
+                    ->onDelete('restrict');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('car_models');
     }
 };

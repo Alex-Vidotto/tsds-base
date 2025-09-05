@@ -14,6 +14,7 @@
                         </div>
                     @endif
 
+                    
                     <div class="accordion mb-2" id="mainAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingMain">
@@ -53,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <form action="/tareas" method="POST" class="d-flex gap-2">
                         @csrf

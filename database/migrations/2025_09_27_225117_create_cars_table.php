@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('matricula')->unique();
-            $table->string('marca');
-            $table->string('modelo');
+            $table->foreignId('car_model_id')
+                    ->constrained('car_models')
+                    ->onDelete('restrict');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
