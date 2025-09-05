@@ -13,4 +13,8 @@ class Car extends Model
         'car_model_id',
         'foto'
     ];
+    public function carModel()
+    {
+        return $this->belongsTo(CarModel::class, 'car_model_id');
+    }
 }
