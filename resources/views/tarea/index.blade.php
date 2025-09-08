@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+<!--
                     <div class="accordion mb-2" id="mainAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingMain">
@@ -52,8 +52,34 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    </div> -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($tareas as $tarea)
+                                <tr>
+                                    <td>{{ $tarea->id }}</td>
+                                    <td>{{ $tarea->nombre }}</td>
+                                    <td>
+                                        <a href = "{{ route('tareas.edit', $tarea->id) }}" class = "btn btn-warning btn-sm">Editar</a>
+                                            <form action = "{{ route('tareas.destroy' , $tarea->id) }}" method = "POST" style = "display:inline-block;">
+                                                @csrf
+                                                @method ('DELETE')
+                                                <button type = "submit" class = "btn btn-danger btn-sm" onclick = "return confirm('¿Estas seguro de eliminar esta tarea')">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                     <form action="/tareas" method="POST" class="d-flex gap-2">
                         @csrf
                         <input type="text" name="titulo" placeholder="Nueva tarea" class="form-control" required>
@@ -66,3 +92,20 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        console.log("jQuery LISTO!");
+    });
+
+    $(document).ready(function(){
+        $('#tablaDetalles').DataTable({
+            "language":{
+
+
+
+            }
+        });
+    });
+</script>
+@endpush

@@ -24,6 +24,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index');
 Route::post('/tareas', [TareaController::class, 'store']);
+Route::get('/tareas/create', [TareaController::class, 'create'])->name('tareas.create');
 Route::get('/tareas/{tarea}/edit', [TareaController::class, 'edit'])->name('tareas.edit');
 Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.update');
 Route::delete('/tareas/{tarea}', [TareaController::class, 'destroy'])->name('tareas.destroy');
+Route::get('/tareas{tarea}', [TareaController::class, 'show'])->name('tareas.show');
+Route::resource('cars', App\Http\Controllers\CarController::class); // Sigue el estándar de Laravel

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Iluinate\Suport\Facades\Input;
 
 use App\Models\Car;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $models = CarModel::all();
+        return view('cars.create', compact('models'));   
     }
 
     /**
@@ -37,7 +39,17 @@ class CarController extends Controller
      */
     public function store(StoreCarRequest $request)
     {
-        //
+        $vehiculo = new Car();
+        $vehiculo->matricula = $request->matricula;
+        $vehiculo->car_model_id = $request->car_model_id;
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
+
+            $vehiculo->foto = $file->getClientOriginalName();
+        }
+        $vehiculo->save();
+        return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
     }
 
     /**
