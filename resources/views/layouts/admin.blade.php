@@ -176,7 +176,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('dist/img/AdminLTELogo.jpg') }}" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">SevenyLevel 3</span>
     </a>
 
@@ -192,40 +192,27 @@
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
       <!-- Sidebar Menu -->
 <div class="menu d-flex flex-column gap-3 p-2">
 
   <!-- Título -->
-  <h3 class="text-center text-white"> Menú Principal</h3>
+  <h5 class="text-center text-white"> Menú Principal</h5>
 
   <!-- Botones -->
   <button class="btn btn-secundary text-white d-flex align-items-center">
-    <i class="fas fa-file-alt me-2"></i> Orden de Trabajo
+    <i class="fas fa-file-alt"></i>&nbsp; Orden de Trabajo
   </button>
 
   <button class="btn btn-secundary text-white d-flex align-items-center">
-    <i class="fas fa-users me-2"></i> Grupos de trabajos
+    <i class="fas fa-users"></i>&nbsp; Grupos de trabajos
   </button>
 
   <button class="btn btn-secundary text-white d-flex align-items-center">
-    <i class="fas fa-car me-2"></i> Vehículos
+    <i class="fas fa-car"></i>&nbsp; Vehículos
   </button>
 
   <button class="btn btn-secundary text-white d-flex align-items-center">
-    <i class="fas fa-clipboard me-2"></i> Stock
+    <i class="fas fa-clipboard"></i>&nbsp; Stock
   </button>
 </div>
 
@@ -233,13 +220,13 @@
     <div class="menu text-white d-flex flex-column gap-3 p-2">
 
   <!-- Título --> 
-    <h3 class="text-center">
-    </i> Parametros de Configuración </h3>
+    <h6 class="text-center">
+   Parametros de Configuración </h6>
   </button>
     </div>
     <!-- /.sidebar -->
      <button class="btn btn-secundary text-white d-flex align-items-center">
-    <i class="fas fa-cog me-2"> </i> Parametros
+    <i class="fas fa-cog"> </i>&nbsp; Parametros
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
