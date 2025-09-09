@@ -207,9 +207,9 @@
     <i class="fas fa-users"></i>&nbsp; Grupos de trabajos
   </button>
 
-  <button class="btn btn-secundary text-white d-flex align-items-center">
+  <a href="{{ route('cars.index') }}" class="btn btn-secundary text-white d-flex align-items-center">
     <i class="fas fa-car"></i>&nbsp; Vehículos
-  </button>
+  </a>
 
   <button class="btn btn-secundary text-white d-flex align-items-center">
     <i class="fas fa-clipboard"></i>&nbsp; Stock

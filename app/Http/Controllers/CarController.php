@@ -17,8 +17,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('carModel.carBrand')->paginate(5);
-        return view('cars.index', compact('cars'));
+        $cars = Car::with('carModel.carBrand')->paginate(2);
+        return view('car.index', compact('cars'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CarController extends Controller
     public function create()
     {
         $carBrands  = \App\Models\CarBrand::with('carModels')->get();
-        return view('cars.create', compact('carBrands'));
+        return view('car.create', compact('carBrands'));
     }
 
     /**
@@ -50,7 +50,7 @@ class CarController extends Controller
             $vehiculo->foto = $file->getClientOriginalName();
         }
         $vehiculo->save();
-        return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
+        return redirect()->route('car.index')->with('success', 'Coche creado con éxito.');
         $vehiculo = new Car();
         $vehiculo->matricula = $request->matricula;
         $vehiculo->car_model_id = $request->car_model_id;
@@ -61,7 +61,7 @@ class CarController extends Controller
             $vehiculo->foto = $file->getClientOriginalName();
         }
         $vehiculo->save();
-        return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
+        return redirect()->route('car.index')->with('success', 'Coche creado con éxito.');
     }
 
     /**
@@ -72,7 +72,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('cars.show', compact('car'));
+        return view('car.show', compact('car'));
     }
 
     /**
@@ -83,7 +83,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        $carModels = \App\Models\CarModel::with('carBrand')->get();
+        
+        return view('car.edit', compact('car', 'carModels'));
     }
 
     /**
