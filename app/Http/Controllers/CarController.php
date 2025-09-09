@@ -17,7 +17,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car::with('carModel.carBrand')->paginate(5);
+        return view('cars.index', compact('cars'));
     }
 
     /**
@@ -27,8 +28,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        $models = CarModel::all();
-        return view('cars.create', compact('models'));   
+        $carBrands  = \App\Models\CarBrand::with('carModels')->get();
+        return view('cars.create', compact('carBrands'));
     }
 
     /**
@@ -50,6 +51,17 @@ class CarController extends Controller
         }
         $vehiculo->save();
         return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
+        $vehiculo = new Car();
+        $vehiculo->matricula = $request->matricula;
+        $vehiculo->car_model_id = $request->car_model_id;
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
+
+            $vehiculo->foto = $file->getClientOriginalName();
+        }
+        $vehiculo->save();
+        return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
     }
 
     /**
@@ -60,7 +72,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        return view('cars.show', compact('car'));
     }
 
     /**

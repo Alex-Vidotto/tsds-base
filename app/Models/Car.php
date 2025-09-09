@@ -17,4 +17,15 @@ class Car extends Model
     {
         return $this->belongsTo(CarModel::class, 'car_model_id');
     }
+
+    public function carServiceDates(){
+        return $this->hasMany(CarServiceDate::class, 'car_id');
+    }
+
+    public function carService(){
+        return $this->belongsToMany(CarService::class, 'car_service_dates', 'car_id', 'car_service_id')
+                    ->withPivot('fecha_mantenimiento')
+                    ->withTimestamps();
+    }
 }
+
