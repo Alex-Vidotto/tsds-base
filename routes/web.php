@@ -30,3 +30,4 @@ Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.
 Route::delete('/tareas/{tarea}', [TareaController::class, 'destroy'])->name('tareas.destroy');
 Route::get('/tareas{tarea}', [TareaController::class, 'show'])->name('tareas.show');
 Route::resource('cars', App\Http\Controllers\CarController::class); // Sigue el estándar de Laravel
+Route::resource('carservicedates', App\Http\Controllers\CarServiceDateController::class);

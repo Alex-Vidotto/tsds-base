@@ -57,14 +57,14 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre</th>
+                                <th>Servicio</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($tareas as $tarea)
                                 <tr>
                                     <td>{{ $tarea->id }}</td>
-                                    <td>{{ $tarea->nombre }}</td>
+                                    <td>{{ $tarea->titulo }}</td>
                                     <td>
                                         <a href = "{{ route('tareas.edit', $tarea->id) }}" class = "btn btn-warning btn-sm">Editar</a>
                                             <form action = "{{ route('tareas.destroy' , $tarea->id) }}" method = "POST" style = "display:inline-block;">

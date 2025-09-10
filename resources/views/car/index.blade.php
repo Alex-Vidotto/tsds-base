@@ -10,7 +10,7 @@
         </a>
     </div>
 
-
+    
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Vehículos Registrados</h5>
@@ -78,6 +78,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                
             </div>
 
             <!-- Paginación -->
@@ -87,4 +88,9 @@
         </div>
     </div>
 </div>
+    <div class="mb-3" style="text-align: right;">
+        <a href="{{ route('carservicedates.index') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Mantenimiento Vehículo
+        </a>
+    </div>
 @endsection
