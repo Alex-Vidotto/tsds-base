@@ -13,46 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-<!--
-                    <div class="accordion mb-2" id="mainAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingMain">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMain" aria-expanded="true" aria-controls="collapseMain">
-                                    Tareas Guardadas
-                                </button>
-                            </h2>
-                            <div id="collapseMain" class="accordion-collapse collapse show" aria-labelledby="headingMain" data-bs-parent="#mainAccordion">
-                                <div class="accordion-body">
-                                    @if($tareas->count())
-                                        <ul class="list-group mb-3">
-                                            @foreach($tareas as $tarea)
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <span>{{ $tarea->id }} - {{ $tarea->titulo }}
-                                                        <br>
-                                                        <small class="text-muted">Creada: {{ $tarea->created_at->format('d/m/Y') }}
-                                                        @if($tarea->updated_at)
-                                                            | Actualizada: {{ $tarea->updated_at->format('d/m/Y') }}
-                                                        @endif
-                                                        </small>
-                                                    </span>
-                                                    <span>
-                                                        <a href="/tareas/{{ $tarea->id }}/edit" class="btn btn-outline-warning">Editar</a>
-                                                        <form action="/tareas/{{ $tarea->id }}" method="POST" style="display:inline;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-                                                        </form>
-                                                    </span>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <div class="text-muted">No hay tareas registradas.</div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -64,7 +25,7 @@
                             @foreach ($tareas as $tarea)
                                 <tr>
                                     <td>{{ $tarea->id }}</td>
-                                    <td>{{ $tarea->nombre }}</td>
+                                    <td>{{ $tarea->titulo }}</td>
                                     <td>
                                         <a href = "{{ route('tareas.edit', $tarea->id) }}" class = "btn btn-warning btn-sm">Editar</a>
                                             <form action = "{{ route('tareas.destroy' , $tarea->id) }}" method = "POST" style = "display:inline-block;">

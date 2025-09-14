@@ -7,6 +7,8 @@ use App\Models\Car;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Models\CarBrand;
+use App\Models\CarModel;
 
 class CarController extends Controller
 {
@@ -28,8 +30,9 @@ class CarController extends Controller
      */
     public function create()
     {
-        $carBrands  = \App\Models\CarBrand::with('carModels')->get();
-        return view('car.create', compact('carBrands'));
+        $carBrands  = CarBrand::with('carModels')->get();
+        $opciones = $this->prepareModelOptions($carBrands);
+        return view('car.create', compact('opciones'));
     }
 
     /**
@@ -43,6 +46,7 @@ class CarController extends Controller
         $vehiculo = new Car();
         $vehiculo->matricula = $request->matricula;
         $vehiculo->car_model_id = $request->car_model_id;
+        
         if($request->hasFile('foto')){
             $file = $request->file('foto');
             $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
@@ -50,18 +54,8 @@ class CarController extends Controller
             $vehiculo->foto = $file->getClientOriginalName();
         }
         $vehiculo->save();
-        return redirect()->route('car.index')->with('success', 'Coche creado con éxito.');
-        $vehiculo = new Car();
-        $vehiculo->matricula = $request->matricula;
-        $vehiculo->car_model_id = $request->car_model_id;
-        if($request->hasFile('foto')){
-            $file = $request->file('foto');
-            $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
-
-            $vehiculo->foto = $file->getClientOriginalName();
-        }
-        $vehiculo->save();
-        return redirect()->route('car.index')->with('success', 'Coche creado con éxito.');
+        return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
+        
     }
 
     /**
@@ -109,5 +103,23 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
         //
+    }
+
+
+    private function prepareModelOptions($carBrands)
+    {
+        $options = [];
+        
+        foreach ($carBrands as $brand) {
+            foreach ($brand->carModels as $model) {
+                $options[] = [
+                    'id' => $model->id,
+                    'text' => $model->nombre . ' - ' . $brand->nombre,
+                    'brand_name' => $brand->nombre,
+                    'model_name' => $model->nombre
+                ];
+            }
+        }
+        return $options;
     }
 }
