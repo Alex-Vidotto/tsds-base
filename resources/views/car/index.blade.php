@@ -23,10 +23,10 @@
             @endif
 
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tablaDetalle">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <!--<th>ID</th>-->
                             <th>Matrícula</th>
                             <th>Marca</th>
                             <th>Modelo</th>
@@ -38,7 +38,7 @@
                     <tbody>
                         @forelse($cars as $car)
                         <tr>
-                            <td>{{ $car->id }}</td>
+                            <!--<td>{{ $car->id }}</td>-->
                             <td>
                                 <strong>{{ $car->matricula }}</strong>
                             </td>
@@ -81,11 +81,7 @@
                 
             </div>
 
-            <!-- Paginación -->
-            <div class="d-flex justify-content-center mt-3">
-                {{ $cars->links('pagination::bootstrap-5') }}
             </div>
-        </div>
     </div>
 </div>
     <div class="mb-3" style="text-align: right;">
@@ -94,3 +90,38 @@
         </a>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+            console.log("Jquery funcionando");
+        });
+
+        $(document).ready(function(){
+            $('#tablaDetalle').DataTable({
+                "language": {
+                    "info": "_TOTAL_ registros",
+                    "search": "Buscar",
+                    "paginate": {
+                        "next": "Siguiente",
+                        "previous": "Anterior",
+                    },
+                    "lengthMenu": 'Mostrar <select class="form-select form-select-sm ms-1 me-1">'+
+                                  '<option value="5">5</option>'+
+                                  '<option value="10">10</option>'+
+                                  '<option value="20">20</option>'+
+                                  '<option value="50">50</option>'+
+                                  '<option value="-1">Todos</option>'+
+                                  '</select> registros',
+                    "loadingRecords": "Cargando...",
+                    "processing": "Procesando...",
+                    "emptyTable": "No hay datos",
+                    "zeroRecords": "No hay coincidencias",
+                    "infoEmpty": "",
+                    "infoFiltered": ""
+                }
+            })
+        })
+
+    </script>
+@endpush

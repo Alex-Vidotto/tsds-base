@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -44,7 +46,7 @@
       </a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="home" class="nav-link">Home</a>
+        <a href="{{ route('home') }}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="https://asistencia.claro.com.ar/asistencia/servicios-en-tu-casa/soporte/como-hago-para-reclamar-o-consultar-por-la-instalacion" class="nav-link">Contact</a>
@@ -230,9 +232,9 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('tareas.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-clipboard"></i>
-                        <p>Stock</p>
+                        <p>Servicios</p>
                     </a>
                 </li>
 
@@ -318,9 +320,12 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 
-<script src = "{{asset('plugins/jquery/jquery.js')}}"></script>
+<script src="{{asset('plugins/jquery/jquery.js')}}"></script>
 
-<script src = "{{asset('plugins/datatables/jquery.dataTables.min..js')}}"></script>
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+
+<!-- agregamos estido al paginate de Jquery DataTable -->
+<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 
 
 @stack('scripts')

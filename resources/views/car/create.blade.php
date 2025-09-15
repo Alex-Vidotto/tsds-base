@@ -7,16 +7,16 @@
                 <div class="card-header">{{ __('Vehiculo') }}</div>
 
                 <div class="card-body">
-                    <from action="{{ route('cars.store') }}" method="POST" enctype="multipart/from-data">
+                    <form action="{{ route('cars.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="matricula" class="form-lable">
+                        <div class="card-body mb-3">
+                            <label for="matricula" class="form-label">
                                 {{ __('Matricula') }}
                             </label>
-                            <div class="col-md-6">
+                            <div class="mb-3">
                                 <input id="matricula" type="text"
-                                class="from-control @error('matricula') is-invalid @enderror"
+                                class="form-control @error('matricula') is-invalid @enderror"
                                 name="matricula" value="{{ old('matricula') }}" required autocomplete="off" autofocus
                                 placeholder="Ejemplo: 123AAB">
 
@@ -29,7 +29,7 @@
                         </div>
 
 
-                        <div class="mb-3">
+                        <div class="card-body mb-3">
                             <label for="car_model_id" class="form-label"><i class="fas fa-car me-1 text-primary"></i>Modelo del Vehiculo</label>
                             <select class="form-select" id="car_model_id" name="car_model_id" required>
                                 <option value="">Seleccione un modelo</option>
@@ -42,38 +42,18 @@
                         </div>
 
 
-                        <!--<div class="mb-3">
-                            <label for="foto" class="form-label">Foto del Vehículo</label>
-                            <input type="file" class="form-control" id="foto" name="foto">
-                        </div>-->
 
-                        <div class="mb-4">
-    <label class="form-label fw-semibold">
-        <i class="fas fa-camera me-1 text-primary"></i>Foto del Vehículo
-    </label>
-    
-    <div class="border rounded-3 p-4 text-center bg-light">
-        <i class="fas fa-cloud-upload-alt fs-1 text-muted mb-3"></i>
-        <p class="text-muted mb-3">Arrastra o selecciona una imagen</p>
-        
-        <input type="file" 
-               class="form-control d-none" 
-               id="foto" 
-               name="foto" 
-               accept="image/*">
-        
-        <label for="foto" class="btn btn-primary">
-            <i class="fas fa-upload me-2"></i>Seleccionar Imagen
-        </label>
-        
-        <div class="mt-2 small text-muted">
-            Formatos: JPG, PNG, GIF - Máx. 2MB
-        </div>
-    </div>
-</div>
-
-
-                        <button type="submit" class="btn btn-primary">Crear Vehículo</button>
+                        <div class="card-body mb-3">
+                            <label for="foto"><i class="fas fa-camera me-1 text-primary"></i>Foto del Vehículo</label>
+                            <input type="file" name="foto" id="foto"
+                                   class="form-control-file @error('foto') is-invalid @enderror" accept="image/*">
+                            @error('foto')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Crear Vehículo</button>
+                        </div>
                     </form>
 
 

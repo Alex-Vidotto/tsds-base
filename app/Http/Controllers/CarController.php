@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Iluinate\Suport\Facades\Input;
 
 use App\Models\Car;
 use App\Http\Controllers\Controller;
@@ -19,7 +18,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('carModel.carBrand')->paginate(2);
+        $cars = Car::with('carModel.carBrand')->get();
         return view('car.index', compact('cars'));
     }
 
@@ -66,7 +65,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return view('car.show', compact('car'));
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -91,7 +90,17 @@ class CarController extends Controller
      */
     public function update(UpdateCarRequest $request, Car $car)
     {
-        //
+        $car->matricula = $request->matricula;
+        $car->car_model_id = $request->car_model_id;
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
+
+            $car->foto = $file->getClientOriginalName();
+        }
+        $car->save();
+        return redirect()->route('cars.index')->with('success', 'Coche actualizado con éxito.');
     }
 
     /**
@@ -102,7 +111,8 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return redirect()->route('cars.index')->with('success', 'Eliminado con éxito.');
     }
 
 

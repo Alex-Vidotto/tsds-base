@@ -14,11 +14,12 @@
                         </div>
                     @endif
 
-                    <table class="table">
+                    <table class="table" id="tablaDetalles">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Servicio</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,20 +54,37 @@
     </div>
 </div>
 @endsection
+
 @push('scripts')
-<script>
-    $(document).ready(function() {
-        console.log("jQuery LISTO!");
-    });
-
-    $(document).ready(function(){
-        $('#tablaDetalles').DataTable({
-            "language":{
-
-
-
-            }
+    <script>
+        $(document).ready(function() {
+            console.log("jQuery LISTO!");
         });
-    });
-</script>
+
+        $(document).ready(function(){
+            $('#tablaDetalles').DataTable({
+                "language":{
+                        "info": "_TOTAL_ registros",
+                        "search": "Buscar",
+                        "paginate": {
+                            "next": "Siguiente",
+                            "previous": "Anterior",
+                        },
+                        "lengthMenu": 'Mostrar <select class="form-select form-select-sm ms-1 me-1">'+
+                                      '<option value="5">5</option>'+
+                                      '<option value="10">10</option>'+
+                                      '<option value="20">20</option>'+
+                                      '<option value="50">50</option>'+
+                                      '<option value="-1">Todos</option>'+
+                                      '</select> registros',
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "emptyTable": "No hay datos",
+                        "zeroRecords": "No hay coincidencias",
+                        "infoEmpty": "",
+                        "infoFiltered": ""
+                }
+            })
+        })
+    </script>
 @endpush
