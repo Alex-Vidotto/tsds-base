@@ -5,15 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Manteimiento') }}</div>
+                <div class="card-header">{{ __('Mantenimiento') }}</div>
 
                 <div class="card-body">
                     <form action="{{ route('carservicedates.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="card-body mb-3">
-                            <label for="fecha_mantenimiento" class="form-label">
-                                {{ __('Fecha para el Manteimiento') }}
+                            <label for="fecha_mantenimiento" class="form-label"><i class="fas fa-calendar me-1 text-primary"></i>
+                                {{ __('Fecha') }}
                             </label>
                             <div class="mb-3">
                                 <input id="fecha_mantenimiento" type="date"
@@ -23,10 +23,11 @@
 
 
                         <div class="card-body mb-3">
-                            <label for="car_id" class="form-label"><i class="fas fa-car me-1 text-primary"></i>Modelo del Vehiculo</label>
+                            <label for="car_id" class="form-label"><i class="fas fa-car me-1 text-primary"></i>Patente</label>
                             <select class="form-select" id="car_id" name="car_id" required>
-                                <option value="">Seleccione un modelo</option>
+                                <option value="">Seleccionar patente</option>
                                 @foreach($cars as $car)
+                                
                                     <option value="{{ $car }}">
                                         {{ $car->matricula }}
                                     </option>
