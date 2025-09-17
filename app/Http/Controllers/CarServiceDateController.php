@@ -29,7 +29,9 @@ class CarServiceDateController extends Controller
      */
     public function create()
     {
-        //
+        $cars = Car::all();
+        $carservices = CarService::all();
+        return view('carservicedates.create', compact('cars', 'carservices'));
     }
 
     /**
@@ -40,7 +42,9 @@ class CarServiceDateController extends Controller
      */
     public function store(StoreCarServiceDateRequest $request)
     {
-        //
+        $validated = $request->validated();
+        CarServiceDate::create($validated);
+        return redirect()->route('carservicedates.index')->with('success', 'Mantenimiento creado exitosamente.');
     }
 
     /**

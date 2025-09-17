@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
     <h1 class="bm-3">Mantenimiento</h1>
-
+    <div class="mb-3" style="text-align: right;">
+        <a href="{{ route('carservicedates.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Nuevo Mantenimiento
+        </a>
+    </div>
 
         <div class="card">
         <div class="card-header">
