@@ -35,6 +35,20 @@
                         </div>
 
 
+                        <div class="card-body mb-3">
+                            <label for="car_service_id" class="form-label"><i class="fas fa-car me-1 text-primary"></i>Modelo del Vehiculo</label>
+                            <select class="form-select" id="car_service_id" name="car_service_id" required>
+                                <option value="">Seleccione un servicio</option>
+                                @foreach($carservices as $carservice)
+                                    <option value="{{ $carservice }}">
+                                        {{ $carservice->Tipo_servicio }}
+                                    </option>
+                                @endforeach                            
+                            </select>
+                        </div>
+
+
+
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Confirmar mantenimiento</button>
