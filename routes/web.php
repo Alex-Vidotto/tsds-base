@@ -22,12 +22,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index');
-Route::post('/tareas', [TareaController::class, 'store']);
-Route::get('/tareas/create', [TareaController::class, 'create'])->name('tareas.create');
-Route::get('/tareas/{tarea}/edit', [TareaController::class, 'edit'])->name('tareas.edit');
-Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.update');
-Route::delete('/tareas/{tarea}', [TareaController::class, 'destroy'])->name('tareas.destroy');
-Route::get('/tareas{tarea}', [TareaController::class, 'show'])->name('tareas.show');
+Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index')->middleware('auth');
+Route::post('/tareas', [TareaController::class, 'store'])->middleware('auth');
+Route::get('/tareas/create', [TareaController::class, 'create'])->name('tareas.create')->middleware('auth');
+Route::get('/tareas/{tarea}/edit', [TareaController::class, 'edit'])->name('tareas.edit')->middleware('auth');
+Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.update')->middleware('auth');
+Route::delete('/tareas/{tarea}', [TareaController::class, 'destroy'])->name('tareas.destroy')->middleware('auth');
+Route::get('/tareas{tarea}', [TareaController::class, 'show'])->name('tareas.show')->middleware('auth');
 Route::resource('cars', App\Http\Controllers\CarController::class)->middleware('auth'); // Sigue el estándar de Laravel
 Route::resource('carservicedates', App\Http\Controllers\CarServiceDateController::class);

@@ -124,9 +124,7 @@ class CarController extends Controller
             foreach ($brand->carModels as $model) {
                 $options[] = [
                     'id' => $model->id,
-                    'text' => $model->nombre . ' - ' . $brand->nombre,
-                    'brand_name' => $brand->nombre,
-                    'model_name' => $model->nombre
+                    'text' => $model->nombre . ' - ' . $brand->nombre
                 ];
             }
         }

@@ -29,5 +29,10 @@ class CarModelSeeder extends Seeder
             'nombre' => 'Expert',
             'car_brand_id' => 2 // Peugeot
         ]);
+
+        CarModel::create([
+            'nombre' => 'H100',
+            'car_brand_id' => 3 //Hyundai
+        ]);
     }
 }

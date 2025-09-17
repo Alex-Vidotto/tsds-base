@@ -14,12 +14,12 @@
                     @csrf
                     @method('PUT')
                     
-                    <div class="card-body mb-3">
+                    <div class="form-group mb-3">
                         <label for="matricula" class="mb-3">Matrícula</label>
                         <input class="form-control" type="text" name="matricula" value="{{ $car->matricula }}" required>
                     </div>
                 
-                    <div class="card-body mb-3">
+                    <div class="form-group mb-3">
                         <label for="car_model_id" class="form-label"><i class="fas fa-car me-1 text-primary"></i>Modelo del Auto</label>
                         <select class="form-select" id="car_model_id" name="car_model_id" required>
                             <option value="">Seleccione un modelo</option>
@@ -33,17 +33,16 @@
                         </select>
                     </div>
 
-                    <div class="card-body mb-3">
-                        <label for="foto" class="form-label"><i class="fas fa-camera me-1 text-primary"></i>Foto del Vehículo</label>
-                        <div class="input-group">
-                            <label for="foto" class="btn btn-outline-primary mb-0">
-                                <i class="fas fa-upload me-1"></i> Seleccionar archivo
-                            </label>
-                            <input type="file" name="foto" id="foto" class="d-none" accept="image/*">
-                            <span class="form-text ms-2">No se ha seleccionado ningún archivo</span>
+                    <div class="form-group mb-3">
+                            <label for="foto"><i class="fas fa-camera me-1 text-primary"></i>Foto del Vehículo</label>
+                            <input type="file" name="foto" id="foto"
+                                   class="form-control-file @error('foto') is-invalid @enderror" accept="image/*">
+                            @error('foto')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
                         @if($car->foto)
-                            <div class="mt-2">
+                            <div class="form-group mb-3">
                                 <img src="{{ asset('images/vehiculos/' . $car->foto) }}" alt="Foto actual" class="img-thumbnail" width="150">
                                 <p class="small text-muted">Foto actual</p>
                             </div>

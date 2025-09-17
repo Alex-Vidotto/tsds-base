@@ -6,6 +6,8 @@ use App\Models\CarServiceDate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarServiceDateRequest;
 use App\Http\Requests\UpdateCarServiceDateRequest;
+use App\Models\Car;
+use App\Models\CarService;
 
 class CarServiceDateController extends Controller
 {
@@ -16,7 +18,8 @@ class CarServiceDateController extends Controller
      */
     public function index()
     {
-        //
+        $carservicedates = CarServiceDate::with('car.carService')->get();
+        return view('carservicedates.index', compact('carservicedates'));
     }
 
     /**
