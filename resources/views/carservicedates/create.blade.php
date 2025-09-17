@@ -1,77 +1,53 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="mb-3" style="text-align: right;">
-        <a href="{{ route('carservicedates.store') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> 
-        </a>
-</div>
-@endsection 
-@section('content')
 <div class="container">
-    <h1 class="bm-3">Mantenimiento</h1>
-    <div class="mb-3" style="text-align: right;">
-        <a href="{{ route('carservicedates.store') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Nuevo Mantenimiento
-        </a>
-    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Mantenimiento') }}</div>
 
-        <div class="card">
-        <div class="card-header">
-            <h5 class="mb-0">Vehículos En Mantenimiento</h5>
-        </div>
-        <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
+                <div class="card-body">
+                    <form action="{{ route('carservicedates.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="card-body mb-3">
+                            <label for="fecha_mantenimiento" class="form-label"><i class="fas fa-calendar me-1 text-primary"></i>
+                                {{ __('Fecha') }}
+                            </label>
+                            <div class="mb-3">
+                                <input id="fecha_mantenimiento" type="date"
+                                placeholder="Ejemplo: 12/12/2025">
+                            </div>
+                        </div>
+
+
+                        <div class="card-body mb-3">
+                            <label for="car_id" class="form-label"><i class="fas fa-car me-1 text-primary"></i>Patente</label>
+                            <select class="form-select" id="car_id" name="car_id" required>
+                                <option value="">Seleccionar patente</option>
+                                @foreach($cars as $car)
+                                
+                                    <option value="{{ $car }}">
+                                        {{ $car->matricula }}
+                                    </option>
+                                @endforeach                            
+                            </select>
+                        </div>
+
+
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Confirmar mantenimiento</button>
+                        </div>
+                    </form>
+
+
                 </div>
-            @endif
-            <div class="table-responsive">
-                <table class="table table-striped" id="tablaDetalle">
-                    <thead>
-                        <tr>
-                            <th>Fecha del Mantenimiento</th>
-                            <th>Matricula del vehiculo</th>
-                            <th>Tipo de Servicio</th>
-                            <th>Fecha Registro</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($carservicedates as $carservicedate)
-                        <tr>
-                            <td>
-                                {{ $carservicedate->fecha_mantenimiento }}
-                            </td>
-                            <td>
-                                {{ $carservicedate->car->matricula }}
-                            </td>
-                            <td>
-                                {{ $carservicedate->carservice->Tipo_servicio }}
-                            </td>
-                            <td>{{ $carservicedate->created_at->format('d/m/Y') }}</td>
-                            <td>
-                                        <a href = "{{ route('carservicedates.edit', $carservicedate->id) }}" class = "btn btn-warning btn-sm">Editar</a>
-                                        </a>
-                                    </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="7" class="text-center">
-                                No hay vehículos registrados
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-
-
-
-
-
-
+            </div>
+        </div>
+    </div>
 </div>
 
 
-@endsection
+@endsection 
