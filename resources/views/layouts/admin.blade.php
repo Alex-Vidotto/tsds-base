@@ -168,10 +168,10 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
+    <button id="dark-mode-toggle" class="btn btn-dark btn-sm" title="Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
+</li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -248,7 +248,15 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
+        <!-- /deslogueo -->
+                <li class="nav-item text-center">
+                  <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="nav-link btn btn-link p-0" style ="color: #f9f7f7ff;">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                    </button>
+                    </a>
+                </li>
     </div>
     <!-- /.sidebar -->
 </aside>
@@ -280,7 +288,31 @@
 
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
+   <script>
+    const toggle = document.getElementById('dark-mode-toggle');
+    const navbar = document.querySelector('.main-header.navbar');
+
+    // Al cargar la página, verifica si está activado el dark mode
+    if(localStorage.getItem('dark-mode') === 'enabled'){
+        document.body.classList.add('dark-mode');
+        navbar.classList.remove('navbar-white', 'navbar-light');
+        navbar.classList.add('navbar-dark', 'bg-dark');
+    }
+
+    toggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        // Cambia las clases de la navbar
+        if(document.body.classList.contains('dark-mode')){
+            navbar.classList.remove('navbar-white', 'navbar-light');
+            navbar.classList.add('navbar-dark', 'bg-dark');
+            localStorage.setItem('dark-mode', 'enabled');
+        } else {
+            navbar.classList.remove('navbar-dark', 'bg-dark');
+            navbar.classList.add('navbar-white', 'navbar-light');
+            localStorage.setItem('dark-mode', 'disabled');
+        }
+    });
+</script>
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
