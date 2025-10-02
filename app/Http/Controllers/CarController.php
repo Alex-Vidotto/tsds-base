@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Modelo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
@@ -21,7 +22,6 @@ class CarController extends Controller
         $cars = Car::with('carModel.carBrand')->get();
         return view('car.index', compact('cars'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
