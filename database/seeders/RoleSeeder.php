@@ -41,4 +41,4 @@ class RoleSeeder extends Seeder
         $admin->givePermissionTo(Permission::all());
         $empleado->givePermissionTo(['ver servicios']);
     }
-}
+};
