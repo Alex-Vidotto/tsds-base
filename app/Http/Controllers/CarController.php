@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use App\Models\Modelo;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\CarBrand;
 use App\Models\CarModel;
-use Illuminate\request;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
