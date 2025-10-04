@@ -9,6 +9,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\CarBrand;
 use App\Models\CarModel;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
