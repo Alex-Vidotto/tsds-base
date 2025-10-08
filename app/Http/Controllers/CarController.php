@@ -9,7 +9,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\CarBrand;
 use App\Models\CarModel;
-use Illuminate\request;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
@@ -23,7 +23,6 @@ class CarController extends Controller
         $cars = Car::with('carModel.carBrand')->get();
         return view('car.index', compact('cars'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

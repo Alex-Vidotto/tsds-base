@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\CarServiceDateController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,18 @@ use App\Http\Controllers\TareaController;
 |
 */
 
+//Route::resource('cars', App\Http\Controllers\CarController::class); // Sigue el estándar de Laravel
+//Route::resource('carservicedates', App\Http\Controllers\CarServiceDateController::class);
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function() {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index')->middleware('auth');
 Route::get('/tareas/ajax', [TareaController::class, 'index'])->name('tareas.ajax')->middleware('auth');
