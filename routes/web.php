@@ -23,7 +23,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index')->middleware('auth');
-Route::post('/tareas', [TareaController::class, 'store'])->middleware('auth');
+Route::get('/tareas/ajax', [TareaController::class, 'index'])->name('tareas.ajax')->middleware('auth');
+Route::post('/tareas', [TareaController::class, 'store'])->name('tareas.store')->middleware('auth');
 Route::get('/tareas/create', [TareaController::class, 'create'])->name('tareas.create')->middleware('auth');
 Route::get('/tareas/{tarea}/edit', [TareaController::class, 'edit'])->name('tareas.edit')->middleware('auth');
 Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.update')->middleware('auth');
