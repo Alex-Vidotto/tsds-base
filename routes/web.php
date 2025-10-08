@@ -54,5 +54,6 @@ Route::middleware(['auth'])->group(function() {
     Route::delete('/carservicedates/{carservicedate}', [carservicedateController::class, 'destroy'])->name('carservicedates.destroy')->middleware('permission:borrar fechas de mantenimiento');
     Route::get('/carservicedates/{carservicedate}', [carservicedateController::class, 'show'])->name('carservicedates.show');
 
+    Route::resource('users', App\Http\Controllers\UserController::class)->middleware('permission:ver autos');
 });
 
