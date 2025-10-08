@@ -211,7 +211,7 @@
                 <li class="nav-header">MENÚ PRINCIPAL</li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Orden de Trabajo</p>
                     </a>
