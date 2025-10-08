@@ -10,6 +10,7 @@
     
     
             <div class="table-responsive">
+                @include(vehiculos.busqueda')
                 <table class="table table-striped" id="tablaDetalle">
                     <thead>
                         <tr>
