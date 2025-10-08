@@ -55,5 +55,15 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/carservicedates/{carservicedate}', [carservicedateController::class, 'show'])->name('carservicedates.show');
 
     Route::resource('users', App\Http\Controllers\UserController::class)->middleware('permission:ver autos');
+
+    Route::get('/grupotrabajo', [App\Http\Controllers\GrupoTrabajoController::class, 'index'])->name('grupotrabajo.index')->middleware('permission:ver grupo de trabajo');
+    Route::post('/grupotrabajo', [App\Http\Controllers\GrupoTrabajoController::class, 'store'])->middleware('permission:crear grupo de trabajo');
+    Route::get('/grupotrabajo/create', [App\Http\Controllers\GrupoTrabajoController::class, 'create'])->name('grupotrabajo.create')->middleware('permission:crear grupo de trabajo');
+    Route::get('/grupotrabajo/{grupotrabajo}/edit', [App\Http\Controllers\GrupoTrabajoController::class, 'edit'])->name('grupotrabajo.edit')->middleware('permission:editar grupo de trabajo');
+    Route::put('/grupotrabajo/{grupotrabajo}', [App\Http\Controllers\GrupoTrabajoController::class, 'update'])->name('grupotrabajo.update')->middleware('permission:editar grupo de trabajo');
+    Route::delete('/grupotrabajo/{grupotrabajo}', [App\Http\Controllers\GrupoTrabajoController::class, 'destroy'])->name('grupotrabajo.destroy')->middleware('permission:borrar grupo de trabajo');
+    Route::get('/grupotrabajo/{grupotrabajo}', [App\Http\Controllers\GrupoTrabajoController::class, 'show'])->name('grupotrabajo.show');
+
+    
 });
 

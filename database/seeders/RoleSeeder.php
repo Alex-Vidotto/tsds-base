@@ -16,26 +16,34 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        //crear permiso
-        Permission::create(['name'=> 'ver servicios']);
-        Permission::create(['name'=> 'crear servicios']);
-        Permission::create(['name'=> 'editar servicios']);
-        Permission::create(['name'=> 'borrar servicios']);
+        
+        // ...existing code...
+        Permission::firstOrCreate(['name'=> 'ver autos']);
+        Permission::firstOrCreate(['name'=> 'crear servicios']);
+        Permission::firstOrCreate(['name'=> 'editar servicios']);
+        Permission::firstOrCreate(['name'=> 'borrar servicios']);
 
-        Permission::create(['name'=> 'ver autos']);
-        Permission::create(['name'=> 'crear autos']);
-        Permission::create(['name'=> 'editar autos']);
-        Permission::create(['name'=> 'borrar autos']);
+        Permission::firstOrCreate(['name'=> 'ver servicios']);
+        Permission::firstOrCreate(['name'=> 'crear autos']);
+        Permission::firstOrCreate(['name'=> 'editar autos']);
+        Permission::firstOrCreate(['name'=> 'borrar autos']);
 
-        Permission::create(['name'=> 'ver fechas de mantenimiento']);
-        Permission::create(['name'=> 'crear fechas de mantenimiento']);
-        Permission::create(['name'=> 'editar fechas de mantenimiento']);
-        Permission::create(['name'=> 'borrar fechas de mantenimiento']);
+        Permission::firstOrCreate(['name'=> 'ver fechas de mantenimiento']);
+        Permission::firstOrCreate(['name'=> 'crear fechas de mantenimiento']);
+        Permission::firstOrCreate(['name'=> 'editar fechas de mantenimiento']);
+        Permission::firstOrCreate(['name'=> 'borrar fechas de mantenimiento']);
+
+        Permission::firstOrCreate(['name'=> 'ver grupo de trabajo']);
+        Permission::firstOrCreate(['name'=> 'crear grupo de trabajo']);
+        Permission::firstOrCreate(['name'=> 'editar grupo de trabajo']);
+        Permission::firstOrCreate(['name'=> 'borrar grupo de trabajo']);
+        // ...existing code...
+
 
 
         //crear roles
-        $admin = Role::create(['name' => 'admin']);
-        $empleado = Role::create(['name' => 'emmpleado']);
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $empleado = Role::firstOrCreate(['name' => 'emmpleado']);
 
         //asignar permiso
         $admin->givePermissionTo(Permission::all());
