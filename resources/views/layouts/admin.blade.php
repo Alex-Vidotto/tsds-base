@@ -218,7 +218,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('grupotrabajo.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Grupos de trabajos</p>
                     </a>
