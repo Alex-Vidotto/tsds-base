@@ -37,6 +37,12 @@ class RoleSeeder extends Seeder
         Permission::firstOrCreate(['name'=> 'crear grupo de trabajo']);
         Permission::firstOrCreate(['name'=> 'editar grupo de trabajo']);
         Permission::firstOrCreate(['name'=> 'borrar grupo de trabajo']);
+        
+        Permission::firstCreate(['name'=> 'ver tareas']);
+        Permission::firstCreate(['name'=> 'crear tareas']);
+        Permission::firstCreate(['name'=> 'editar tareas']);
+        Permission::firstCreate(['name'=> 'borrar tareas']);
+
         // ...existing code...
 
 

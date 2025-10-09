@@ -1,12 +1,12 @@
 <div class = "container mt-3">
-    <form action = "{{ route ('vehiculos.index')} method = "GET" autocomplete = "on" role = "search">
+    <form action = "{{ route ('vehiculos.index')}}" method = "GET" autocomplete = "on" role = "search">
         <div class = "row">
             <div class = "col-lg-3 col-md-4 col-sm-6 mb-3">
                 <label for = "modelo_id" > Modelo</label>
                 <select name = "modelo_id" id = "modelo_id" class = "form-control">
                     <option value = "">-- Todos los modelos --</option>
                     @foreach ($modelos as $modelo)
-                        <option value = "{{$modelo->id}}" {{ request('modelo_id') == $modelo->id ? 'selected' : }}>
+                        <option value = "{{$modelo->id}}" {{ request('modelo_id') == $modelo->id ? 'selected' : '' }}>
                         {{ $modelo->nombre }}
                         </option>
                     @endforeach
@@ -21,7 +21,7 @@
                     class = "form-control"
                     value = "{{ request('desde') }}">
             </div>
-            <div class = "col-lg-3 col-md-4 col-sm-6 mb-3"
+            <div class = "col-lg-3 col-md-4 col-sm-6 mb-3">
                 <label for = "hasta"> Fecha Hasta </label>
                 <input
                     type = "date"

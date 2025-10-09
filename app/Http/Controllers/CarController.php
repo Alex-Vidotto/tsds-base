@@ -24,9 +24,9 @@ class CarController extends Controller
         $hasta = $request ->hasta;    
         $modelo_id = $request ->modelo_id;
         if(count($request->all()) >0) {
-            $sql = Car::with('modelo.marca');
+            $sql = Car::with('carModel.carBrand');
             if($modelo_id){
-                $sql = $sql->where('modelo_id', $modelo_id);
+                $sql = $sql->where('car_model_id', $modelo_id);
             }
             if($desde){
                 $sql = $sql->whereDate('created_at', '>=', $desde);
@@ -40,10 +40,11 @@ class CarController extends Controller
             
         }
         else {
-            $cars = Car::with('carModel.carBrand')->get();
-            $vehiculos = Car::with('modelo.marca')
+            $cars = Car::with('carModel.carBrand')
                 ->orderBy('created_at', 'desc')
                 ->get();
+            $vehiculos = null;
+            $modelo = null;   
             $modelo_id = null;
             $desde = null;
             $hasta = null;
