@@ -27,14 +27,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['role:admin'])->group(function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::get('/tareas', [TareaController::class, 'index'])->name('tareas.index')->middleware('permission:ver tareas');
     Route::post('/tareas', [TareaController::class, 'store'])->middleware('permission:crear tareas');
     Route::get('/tareas/create', [TareaController::class, 'create'])->name('tareas.create')->middleware('permission:crear tareas');
     Route::delete('/tareas/{tarea}', [TareaController::class, 'destroy'])->name('tareas.destroy')->middleware('permission:borrar tareas');
-    Route::get('/tareas{tarea}', [TareaController::class, 'show'])->name('tareas.show');
+    Route::get('/tareas/{tarea}', [TareaController::class, 'show'])->name('tareas.show');
     Route::get('/tareas/{tarea}/edit', [TareaController::class, 'edit'])->name('tareas.edit')->middleware('permission:editar tareas');
     Route::put('/tareas/{tarea}', [TareaController::class, 'update'])->name('tareas.update')->middleware('permission:editar tareas');
 
@@ -46,24 +46,25 @@ Route::middleware(['auth'])->group(function() {
     Route::delete('/cars/{car}', [CarController::class, 'destroy'])->name('cars.destroy')->middleware('permission:borrar autos');
     Route::get('/cars/{car}', [CarController::class, 'show'])->name('cars.show');
 
-    Route::get('/carservicedates', [carservicedateController::class, 'index'])->name('carservicedates.index')->middleware('permission:ver fechas de mantenimiento');
-    Route::post('/carservicedates', [carservicedateController::class, 'store'])->middleware('permission:crear fechas de mantenimiento');
-    Route::get('/carservicedates/create', [carservicedateController::class, 'create'])->name('carservicedates.create')->middleware('permission:crear fechas de mantenimiento');
-    Route::get('/carservicedates/{carservicedate}/edit', [carservicedateController::class, 'edit'])->name('carservicedates.edit')->middleware('permission:editar fechas de mantenimiento');
-    Route::put('/carservicedates/{carservicedate}', [carservicedateController::class, 'update'])->name('carservicedates.update')->middleware('permission:editar fechas de mantenimiento');
-    Route::delete('/carservicedates/{carservicedate}', [carservicedateController::class, 'destroy'])->name('carservicedates.destroy')->middleware('permission:borrar fechas de mantenimiento');
-    Route::get('/carservicedates/{carservicedate}', [carservicedateController::class, 'show'])->name('carservicedates.show');
+    Route::get('/carservicedates', [CarServiceDateController::class, 'index'])->name('carservicedates.index')->middleware('permission:ver fechas de mantenimiento');
+    Route::post('/carservicedates', [CarServiceDateController::class, 'store'])->middleware('permission:crear fechas de mantenimiento');
+    Route::get('/carservicedates/create', [CarServiceDateController::class, 'create'])->name('carservicedates.create')->middleware('permission:crear fechas de mantenimiento');
+    Route::get('/carservicedates/{carservicedate}/edit', [CarServiceDateController::class, 'edit'])->name('carservicedates.edit')->middleware('permission:editar fechas de mantenimiento');
+    Route::put('/carservicedates/{carservicedate}', [CarServiceDateController::class, 'update'])->name('carservicedates.update')->middleware('permission:editar fechas de mantenimiento');
+    Route::delete('/carservicedates/{carservicedate}', [CarServiceDateController::class, 'destroy'])->name('carservicedates.destroy')->middleware('permission:borrar fechas de mantenimiento');
+    Route::get('/carservicedates/{carservicedate}', [CarServiceDateController::class, 'show'])->name('carservicedates.show');
 
     Route::resource('users', App\Http\Controllers\UserController::class)->middleware('permission:ver autos');
 
     Route::get('/grupotrabajo', [App\Http\Controllers\GrupoTrabajoController::class, 'index'])->name('grupotrabajo.index')->middleware('permission:ver grupo de trabajo');
     Route::post('/grupotrabajo', [App\Http\Controllers\GrupoTrabajoController::class, 'store'])->middleware('permission:crear grupo de trabajo');
-    Route::get('/grupotrabajo/create', [App\Http\Controllers\GrupoTrabajoController::class, 'create'])->name('grupotrabajo.create')->middleware('permission:crear grupo de trabajo');
+    Route::resource('grupotrabajo', App\Http\Controllers\GrupoTrabajoController::class);
+
     Route::get('/grupotrabajo/{grupotrabajo}/edit', [App\Http\Controllers\GrupoTrabajoController::class, 'edit'])->name('grupotrabajo.edit')->middleware('permission:editar grupo de trabajo');
     Route::put('/grupotrabajo/{grupotrabajo}', [App\Http\Controllers\GrupoTrabajoController::class, 'update'])->name('grupotrabajo.update')->middleware('permission:editar grupo de trabajo');
     Route::delete('/grupotrabajo/{grupotrabajo}', [App\Http\Controllers\GrupoTrabajoController::class, 'destroy'])->name('grupotrabajo.destroy')->middleware('permission:borrar grupo de trabajo');
     Route::get('/grupotrabajo/{grupotrabajo}', [App\Http\Controllers\GrupoTrabajoController::class, 'show'])->name('grupotrabajo.show');
-
+    
     
 });
 
