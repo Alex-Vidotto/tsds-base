@@ -1,5 +1,5 @@
 <div class = "container mt-3">
-    <form action = "{{ route ('vehiculos.index')}}" method = "GET" autocomplete = "on" role = "search">
+    <form action = "{{ route ('cars.index')}}" method = "GET" autocomplete = "on" role = "search">
         <div class = "row">
             <div class = "col-lg-3 col-md-4 col-sm-6 mb-3">
                 <label for = "modelo_id" > Modelo</label>
@@ -34,7 +34,7 @@
                 <button type = "submit" class = "btn btn-primary mr-2">
                     <i class = "fa fa-filter"></i> Filtrar
                 </button>  
-                <a href = "{{ route ('vehiculos.index') }}" class = "btn btn-secondary">
+                <a href = "{{ route ('cars.index') }}" class = "btn btn-secondary">
                     <i class = "fas fa-eraser"></i> Limpiar
                 </a>
             </div>

@@ -1,28 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4">Vehículos</h1>
-
     <div class="mb-3" style="text-align: right;">
-        <a href="{{ route('cars.create') }}" class="btn btn-primary">
+        <a href="{{ route('cars.create') }}" class="btn btn-outline-primary">
             <i class="fas fa-plus"></i> Nuevo Vehículo
         </a>
     </div>
 
     
-    <div class="card">
-        <div class="card-header">
-            <h5 class="mb-0">Vehículos Registrados</h5>
-        </div>
-        <div class="card-body">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
+    
             <div class="table-responsive">
+                @include('car.busqueda')
                 <table class="table table-striped" id="tablaDetalle">
                     <thead>
                         <tr>
@@ -58,11 +46,11 @@
                             </td>
                             <td>{{ $car->created_at->format('d/m/Y') }}</td>
                             <td>
-                                        <a href = "{{ route('cars.edit', $car->id) }}" class = "btn btn-warning btn-sm">Editar</a>
+                                        <a href = "{{ route('cars.edit', $car->id) }}" class = "btn btn-outline-warning">Editar</a>
                                             <form action = "{{ route('cars.destroy' , $car->id) }}" method = "POST" style = "display:inline-block;">
                                                 @csrf
                                                 @method ('DELETE')
-                                                <button type = "submit" class = "btn btn-danger btn-sm" onclick = "return confirm('¿Estas seguro de eliminar el vehiculo?')">
+                                                <button type = "submit" class = "btn btn-outline-danger text-nowrap" onclick = "return confirm('¿Estas seguro de eliminar el vehiculo?')">
                                                     Eliminar
                                                 </button>
                                             </form>

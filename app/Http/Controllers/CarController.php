@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\CarBrand;
 use App\Models\CarModel;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
@@ -16,12 +17,45 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::with('carModel.carBrand')->get();
-        return view('car.index', compact('cars'));
+        $modelos = CarModel::all();
+        $desde = $request ->desde;
+        $hasta = $request ->hasta;    
+        $modelo_id = $request ->modelo_id;
+        if(count($request->all()) >0) {
+            $sql = Car::with('carModel.carBrand');
+            if($modelo_id){
+                $sql = $sql->where('car_model_id', $modelo_id);
+            }
+            if($desde){
+                $sql = $sql->whereDate('created_at', '>=', $desde);
+            }
+            if($hasta){
+                $sql = $sql->whereDate('created_at', '<=', $hasta);
+            }
+            $vehiculos = $sql
+                ->orderBy('created_at', 'desc')
+                ->get();
+            
+        }
+        else {
+            $cars = Car::with('carModel.carBrand')
+                ->orderBy('created_at', 'desc')
+                ->get();
+            $vehiculos = null;
+            $modelo = null;   
+            $modelo_id = null;
+            $desde = null;
+            $hasta = null;
+        }
+        return view('car.index', compact ('cars','vehiculos',
+        'modelos',
+        'modelo_id',
+        'desde',
+        'hasta',
+        ));
     }
-
     /**
      * Show the form for creating a new resource.
      *
