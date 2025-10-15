@@ -15,8 +15,8 @@ class TareaSeeder extends Seeder
      */
     public function run()
     {
-        Tarea::create(['titulo' => 'Conexión']);
-        Tarea::create(['titulo' => 'Desconexión']);
-        Tarea::create(['titulo' => 'Mantenimiento']);
+        Tarea::firstOrCreate(['titulo' => 'Conexión']);
+        Tarea::firstOrCreate(['titulo' => 'Desconexión']);
+        Tarea::firstOrCreate(['titulo' => 'Mantenimiento']);
     }
 }

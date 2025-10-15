@@ -16,43 +16,52 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        Permission::findOrCreate('ver servicios');
+        Permission::findOrCreate('crear servicios');
+        Permission::findOrCreate('editar servicios');
+        Permission::findOrCreate('borrar servicios');
         
-        // ...existing code...
-        Permission::firstOrCreate(['name'=> 'ver autos']);
-        Permission::firstOrCreate(['name'=> 'crear servicios']);
-        Permission::firstOrCreate(['name'=> 'editar servicios']);
-        Permission::firstOrCreate(['name'=> 'borrar servicios']);
+        Permission::findOrCreate('ver autos');
+        Permission::findOrCreate('crear autos');
+        Permission::findOrCreate('editar autos');
+        Permission::findOrCreate('borrar autos');
 
-        Permission::firstOrCreate(['name'=> 'ver servicios']);
-        Permission::firstOrCreate(['name'=> 'crear autos']);
-        Permission::firstOrCreate(['name'=> 'editar autos']);
-        Permission::firstOrCreate(['name'=> 'borrar autos']);
+        Permission::findOrCreate('ver fechas de mantenimiento');
+        Permission::findOrCreate('crear fechas de mantenimiento');
+        Permission::findOrCreate('editar fechas de mantenimiento');
+        Permission::findOrCreate('borrar fechas de mantenimiento');
 
-        Permission::firstOrCreate(['name'=> 'ver fechas de mantenimiento']);
-        Permission::firstOrCreate(['name'=> 'crear fechas de mantenimiento']);
-        Permission::firstOrCreate(['name'=> 'editar fechas de mantenimiento']);
-        Permission::firstOrCreate(['name'=> 'borrar fechas de mantenimiento']);
-
-        Permission::firstOrCreate(['name'=> 'ver grupo de trabajo']);
-        Permission::firstOrCreate(['name'=> 'crear grupo de trabajo']);
-        Permission::firstOrCreate(['name'=> 'editar grupo de trabajo']);
-        Permission::firstOrCreate(['name'=> 'borrar grupo de trabajo']);
+        Permission::findOrCreate('ver grupo de trabajo');
+        Permission::findOrCreate('crear grupo de trabajo');
+        Permission::findOrCreate('editar grupo de trabajo');
+        Permission::findOrCreate('borrar grupo de trabajo');
         
-        Permission::firstCreate(['name'=> 'ver tareas']);
-        Permission::firstCreate(['name'=> 'crear tareas']);
-        Permission::firstCreate(['name'=> 'editar tareas']);
-        Permission::firstCreate(['name'=> 'borrar tareas']);
+        Permission::findOrCreate('ver tareas');
+        Permission::findOrCreate('crear tareas');
+        Permission::findOrCreate('editar tareas');
+        Permission::findOrCreate('borrar tareas');
 
-        // ...existing code...
+        Permission::findOrCreate('ver usuario');
+        Permission::findOrCreate('crear usuario');
+        Permission::findOrCreate('editar usuario');
+        Permission::findOrCreate('borrar usuario');
 
-
+        Permission::findOrCreate('ver grupo de trabajo');
+        Permission::findOrCreate('crear grupo de trabajo');
+        Permission::findOrCreate('editar grupo de trabajo');
+        Permission::findOrCreate('borrar grupo de trabajo');
 
         //crear roles
-        $admin = Role::firstOrCreate(['name' => 'admin']);
-        $empleado = Role::firstOrCreate(['name' => 'emmpleado']);
+        $admin = Role::findOrCreate('admin');
+        $empleado = Role::findOrCreate('empleado');
 
         //asignar permiso
         $admin->givePermissionTo(Permission::all());
-        $empleado->givePermissionTo(['ver servicios']);
+        $empleado->givePermissionTo([
+            'ver servicios',
+            'ver autos',
+            'ver tareas',
+        ]);
+
     }
-};
+}

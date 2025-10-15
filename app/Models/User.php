@@ -26,6 +26,11 @@ class User extends Authenticatable
         'foto',
     ];
 
+    public function grupoTrabajo()
+    {
+        return $this->belongsTo(GrupoTrabajo::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -15,22 +15,22 @@ class CarModelSeeder extends Seeder
      */
     public function run()
     {
-        CarModel::create([
+        CarModel::firstOrCreate([
             'nombre' => 'Kangoo',
             'car_brand_id' => 1 // Renault
         ]);
         
-        CarModel::create([
+        CarModel::firstOrCreate([
             'nombre' => 'Partner',
             'car_brand_id' => 2 // Peugeot
         ]);
 
-        CarModel::create([
+        CarModel::firstOrCreate([
             'nombre' => 'Expert',
             'car_brand_id' => 2 // Peugeot
         ]);
 
-        CarModel::create([
+        CarModel::firstOrCreate([
             'nombre' => 'H100',
             'car_brand_id' => 3 //Hyundai
         ]);

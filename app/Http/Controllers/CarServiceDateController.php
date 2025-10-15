@@ -42,8 +42,7 @@ class CarServiceDateController extends Controller
      */
     public function store(StoreCarServiceDateRequest $request)
     {
-        $validated = $request->validated();
-        CarServiceDate::create($validated);
+        CarServiceDate::create($request->validated());
         return redirect()->route('carservicedates.index')->with('success', 'Mantenimiento creado exitosamente.');
     }
 

@@ -15,12 +15,12 @@ class CarServiceSeeder extends Seeder
      */
     public function run()
     {
-        CarService::create(['Tipo_servicio' => 'Mantenimiento']);
-        CarService::create(['Tipo_servicio' => 'Reparación']);
-        CarService::create(['Tipo_servicio' => 'Limpieza']);
-        CarService::create(['Tipo_servicio' => 'Cambio de aceite']);
-        CarService::create(['Tipo_servicio' => 'Alineación y balanceo']);
-        CarService::create(['Tipo_servicio' => 'Revisión de frenos']);
-        CarService::create(['Tipo_servicio' => 'Servicio de neumáticos']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Mantenimiento']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Reparación']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Limpieza']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Cambio de aceite']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Alineación y balanceo']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Revisión de frenos']);
+        CarService::firstOrCreate(['Tipo_servicio' => 'Servicio de neumáticos']);
     }
 }

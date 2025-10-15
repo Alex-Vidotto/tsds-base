@@ -12,10 +12,7 @@ class CarServiceDate extends Model
     'car_id',
     'car_service_id'];
 
-    public function carServiceDates(): HasMany
-    {
-        return $this->hasMany(CarServiceDate::class, 'car_id');
-    }
+
     // un registro tiene muchos servicios y muchos autos repetidos
 
     public function car(){

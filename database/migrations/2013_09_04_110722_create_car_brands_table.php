@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tareas', function (Blueprint $table) {
+        Schema::create('car_brands', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->boolean('completada')->default(false);
-            $table->foreignId('grupo_trabajo_id')
-                  ->nullable()
-                  ->constrained('grupo_trabajos')
-                  ->onDelete('cascade');
+            $table->string('nombre')->unique();
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tareas');
+        Schema::dropIfExists('car_brands');
     }
 };

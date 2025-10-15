@@ -16,8 +16,12 @@
                                 {{ __('Fecha') }}
                             </label>
                             <div class="mb-3">
+<<<<<<< HEAD
                                 <input id="fecha_mantenimiento" type="date"
                                 placeholder="Ejemplo: 12/12/2025">
+=======
+                                <input id="fecha_mantenimiento" type="date" name="fecha_mantenimiento" placeholder="Ejemplo: 12/12/2025">
+>>>>>>> master
                             </div>
                         </div>
 
@@ -28,7 +32,11 @@
                                 <option value="">Seleccionar patente</option>
                                 @foreach($cars as $car)
                                 
+<<<<<<< HEAD
                                     <option value="{{ $car }}">
+=======
+                                    <option value="{{ $car->id }}">
+>>>>>>> master
                                         {{ $car->matricula }}
                                     </option>
                                 @endforeach                            
@@ -41,7 +49,11 @@
                             <select class="form-select" id="car_service_id" name="car_service_id" required>
                                 <option value="">Seleccione un servicio</option>
                                 @foreach($carservices as $carservice)
+<<<<<<< HEAD
                                     <option value="{{ $carservice }}">
+=======
+                                    <option value="{{ $carservice->id }}">
+>>>>>>> master
                                         {{ $carservice->Tipo_servicio }}
                                     </option>
                                 @endforeach                            

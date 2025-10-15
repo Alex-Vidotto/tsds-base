@@ -15,7 +15,7 @@ class CarServiceDateSeeder extends Seeder
      */
     public function run()
     {
-        CarServiceDate::create([
+        CarServiceDate::firstOrCreate([
             'fecha_mantenimiento' => '2024-10-15',
             'car_id' => 1, // referencia al auto
             'car_service_id' => 1 // tipo de mantenimiento que se le hizo
