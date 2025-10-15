@@ -21,7 +21,7 @@ return new class extends Migration
                     ->onDelete('restrict');
             $table->string('foto')->nullable();
             $table->foreignId('grupo_trabajo_id')
-                    ->constrained('grupo_trabajo_models')
+                    ->constrained('grupo_trabajos')
                     ->onDelete('cascade');
             $table->string('estado')->default('disponible');
             $table->timestamps();

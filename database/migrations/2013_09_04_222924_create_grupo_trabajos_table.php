@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('grupo_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->string('matricula')->unique();
-            $table->foreignId('car_model_id')
-                    ->constrained('car_models')
-                    ->onDelete('restrict');
-            $table->string('foto')->nullable();
+            $table->string('nombre');
+            //$table->foreignId('car_id')->nullable()->constrained()->onDelete('set null'); // auto asignado
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('grupo_trabajos');
     }
 };
