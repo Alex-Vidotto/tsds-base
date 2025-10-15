@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarServiceDateController;
