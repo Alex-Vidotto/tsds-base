@@ -28,7 +28,7 @@
             @forelse($grupos as $grupo)
                 <tr>
                     <td>{{ $grupo->nombre }}</td>
-                    <td>{{ $grupo->auto?->modelo ?? 'Sin auto' }}</td>
+                    <td>{{ $grupo->auto->matricula ?? 'Sin auto' }}</td>
                     <td>
                         @forelse($grupo->empleados as $empleado)
                             <span class="badge bg-secondary">{{ $empleado->name }}</span>

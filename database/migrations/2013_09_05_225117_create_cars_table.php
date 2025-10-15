@@ -20,6 +20,10 @@ return new class extends Migration
                     ->constrained('car_models')
                     ->onDelete('restrict');
             $table->string('foto')->nullable();
+            $table->foreignId('grupo_trabajo_id')
+                    ->constrained('grupo_trabajo_models')
+                    ->onDelete('cascade');
+            $table->string('estado')->default('disponible');
             $table->timestamps();
         });
     }
