@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
@@ -17,10 +18,12 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $CarModel = CarModel::with('carBrand')->get();
+    
         $cars = Car::with('carModel.carBrand');
-        if ($request->felled ('carModel_id')) {
+        if ($request->filled('carModel_id')) {
             $cars->where('car_model_id', $request->carModel_id);
         }
         if ($request->filled('desde')) {
@@ -49,10 +52,13 @@ class CarController extends Controller
      */
     public function create()
     {
+       
         $carBrands  = CarBrand::with('carModels')->get();
         $opciones = $this->prepareModelOptions($carBrands);
         return view('car.create', compact('opciones'));
+
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -151,24 +157,27 @@ class CarController extends Controller
         return $options;
     }
     public function exportPDF(Request $request)
-    {
-        $desde = $request->input('desde');
-        $hasta = $request->input('hasta');
-        $modelo_id = $request->input('carModel_id');
-        $query = Car::with('carModel.carBrand');
-        if ($desde && $hasta) {
-            $query->whereDate('created_at', '>=', $desde)
-                  ->whereDate('created_at', '<=', $hasta);
-            }
-        if ($carModels_id) {
-            $query->where('car_model_id', $carModel_id);
-        }
-        else {
-            $carModels = null;
-        }
-        $cars = $query->orderBy('created_at', 'desc')->get();
-        $pdf = PDF::loadView('car.pdf', compact('cars', 'desde', 'hasta', 'carModels'))
-               ->setPaper('a4', 'landscape');
-        return $pdf->download('informe_coches.pdf');
+{
+    $desde = $request->input('desde');
+    $hasta = $request->input('hasta');
+    $carModel_id = $request->input('carModel_id'); // ← Nombre consistente
+    
+    $query = Car::with('carModel.carBrand');
+    
+    if ($desde && $hasta) {
+        $query->whereDate('created_at', '>=', $desde)
+              ->whereDate('created_at', '<=', $hasta);
     }
+    
+    if ($carModel_id) { // ← Mismo nombre
+        $query->where('car_model_id', $carModel_id); // ← Mismo nombre
+    }
+    
+    $cars = $query->orderBy('created_at', 'desc')->get();
+    
+    $pdf = PDF::loadView('car.pdf', compact('cars', 'desde', 'hasta', 'carModel_id'))
+           ->setPaper('a4', 'landscape');
+    
+    return $pdf->download('informe_coches.pdf');
+}
 }

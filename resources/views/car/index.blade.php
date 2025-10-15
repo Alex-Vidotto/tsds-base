@@ -88,7 +88,7 @@
         </button>
 
         
-        <a href="{{ route('cars.exportPdf', [], false)
+        <a href="{{ route('cars.pdf', [], false)
             .  '?desde=' . request('desde')
             .  '&hasta=' . request('hasta')
             .  '&car_brand_id=' . request('car_brand_id')}}"
