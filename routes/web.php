@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cars/{car}/edit', [CarController::class, 'edit'])->name('cars.edit')->middleware('permission:editar autos');
     Route::put('/cars/{car}', [CarController::class, 'update'])->name('cars.update')->middleware('permission:editar autos');
     Route::delete('/cars/{car}', [CarController::class, 'destroy'])->name('cars.destroy')->middleware('permission:borrar autos');
+    Route::get('/cars/export/pdf', [app\Http\Controllers\CarController::class, 'exportPDF'])->name('cars.exportpdf')->middleware('permission:ver autos');
 
     //Usuarios
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('permission:ver usuario');
@@ -73,4 +74,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/grupotrabajos/{grupotrabajo}/edit', [GrupoTrabajoController::class, 'edit'])->name('grupotrabajos.edit')->middleware('permission:editar grupo de trabajo');
     Route::put('/grupotrabajos/{grupotrabajo}', [GrupoTrabajoController::class, 'update'])->name('grupotrabajos.update')->middleware('permission:editar grupo de trabajo');
     Route::delete('/grupotrabajos/{grupotrabajo}', [GrupoTrabajoController::class, 'destroy'])->name('grupotrabajos.destroy')->middleware('permission:borrar grupo de trabajo');
+
 });

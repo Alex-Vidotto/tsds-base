@@ -19,8 +19,27 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('carModel.carBrand')->get();
-        return view('car.index', compact('cars'));
+        $cars = Car::with('carModel.carBrand');
+        if ($request->felled ('carModel_id')) {
+            $cars->where('car_model_id', $request->carModel_id);
+        }
+        if ($request->filled('desde')) {
+            $cars->whereDate('created_at', '>=', $request->desde);
+        }
+        if ($request->filled('hasta')) {
+            $cars->whereDate('created_at', '<=', $request->hasta);
+        }
+        $cars = $cars->orderBy('created_at', 'desc')->paginate(10);
+        if ($request->has('pdf')) {
+            return $this->exportPDF($request);
+        }
+        return view('car.index', [
+            'cars' => $cars,
+            'carModels' => $CarModel,
+            'carModel_id' => $request->carModel_id,
+            'desde' => $request->desde,
+            'hasta' => $request->hasta,
+        ]);
     }
 
     /**
