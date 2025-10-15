@@ -168,17 +168,14 @@
         </a>
       </li>
       <li class="nav-item">
-<<<<<<< HEAD
     <button id="dark-mode-toggle" class="btn btn-dark btn-sm" title="Dark Mode">
         <i class="fas fa-moon"></i>
     </button>
 </li>
-=======
         <button id="dark-mode-toggle" class="btn btn-dark btn-sm" title="Dark Mode">
             <i class="fas fa-moon"></i>
         </button>
       </li>
->>>>>>> master
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -204,11 +201,7 @@
                      alt="User Image">
             </div>
             <div class="info">
-<<<<<<< HEAD
-                <a href="#" class="d-block">Alex Vidotto</a>
-=======
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
->>>>>>> master
             </div>
         </div>
 
@@ -222,24 +215,14 @@
                 <li class="nav-header">MENÚ PRINCIPAL</li>
 
                 <li class="nav-item">
-<<<<<<< HEAD
-                    <a href="{{ route('users.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-file-alt"></i>
-                        <p>Orden de Trabajo</p>
-=======
                     <a href="{{  route('users.index')  }}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Usuarios</p>
->>>>>>> master
                     </a>
                 </li>
 
                 <li class="nav-item">
-<<<<<<< HEAD
-                    <a href="{{ route('grupotrabajo.index') }}" class="nav-link">
-=======
                     <a href="{{ route('grupotrabajos.index') }}" class="nav-link">
->>>>>>> master
                         <i class="nav-icon fas fa-users"></i>
                         <p>Grupos de trabajos</p>
                     </a>
@@ -268,18 +251,6 @@
                     </a>
                 </li>
             </ul>
-<<<<<<< HEAD
-        </nav>
-        <!-- /deslogueo -->
-                <li class="nav-item text-center">
-                  <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="nav-link btn btn-link p-0" style ="color: #f9f7f7ff;">
-                    <i class="fas fa-sign-out-alt"></i> Salir
-                    </button>
-                    </a>
-                </li>
-=======
             <li class="nav-item text-center">
                 <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
@@ -290,7 +261,6 @@
             </li>
         </nav>
         <!-- /.sidebar-menu -->
->>>>>>> master
     </div>
     <!-- /.sidebar -->
 </aside>
@@ -322,35 +292,7 @@
 
 
     <!-- Control Sidebar -->
-<<<<<<< HEAD
-   <script>
-    const toggle = document.getElementById('dark-mode-toggle');
-    const navbar = document.querySelector('.main-header.navbar');
-
-    // Al cargar la página, verifica si está activado el dark mode
-    if(localStorage.getItem('dark-mode') === 'enabled'){
-        document.body.classList.add('dark-mode');
-        navbar.classList.remove('navbar-white', 'navbar-light');
-        navbar.classList.add('navbar-dark', 'bg-dark');
-    }
-
-    toggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        // Cambia las clases de la navbar
-        if(document.body.classList.contains('dark-mode')){
-            navbar.classList.remove('navbar-white', 'navbar-light');
-            navbar.classList.add('navbar-dark', 'bg-dark');
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            navbar.classList.remove('navbar-dark', 'bg-dark');
-            navbar.classList.add('navbar-white', 'navbar-light');
-            localStorage.setItem('dark-mode', 'disabled');
-        }
-    });
-</script>
-=======
     <aside class="control-sidebar control-sidebar-dark">
->>>>>>> master
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
@@ -390,22 +332,12 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 
-<<<<<<< HEAD
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous"></script>
-
-=======
 <script src="{{asset('plugins/jquery/jquery.js')}}"></script>
->>>>>>> master
 
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 
 <!-- agregamos estido al paginate de Jquery DataTable -->
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<<<<<<< HEAD
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-=======
 
 
 <script>
@@ -428,7 +360,6 @@
         }
     });
 </script>
->>>>>>> master
 
 @stack('scripts')
 
