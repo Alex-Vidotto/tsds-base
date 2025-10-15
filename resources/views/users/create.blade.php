@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-
-@extends('layouts.admin')
-
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Usuarios</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    Has iniciado sesión!
-                </div>
-            </div>
-        </div>
-    </div>
-
-=======
 @extends('layouts.admin')
 
 @section('content')
@@ -80,5 +54,4 @@
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
->>>>>>> master
 @endsection
