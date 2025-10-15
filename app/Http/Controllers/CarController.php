@@ -138,9 +138,9 @@ class CarController extends Controller
         $modelo_id = $request->input('carModel_id');
         $query = Car::with('carModel.carBrand');
         if ($desde && $hasta) {
-            $query->whereDate('created_at', '>=', $desde);
-                ->whereDate('created_at', '<=', $hasta);
-        }
+            $query->whereDate('created_at', '>=', $desde)
+                  ->whereDate('created_at', '<=', $hasta);
+            }
         if ($carModels_id) {
             $query->where('car_model_id', $carModel_id);
         }
@@ -148,7 +148,7 @@ class CarController extends Controller
             $carModels = null;
         }
         $cars = $query->orderBy('created_at', 'desc')->get();
-        $pdf = PDF::loadView('car.pdf', compact('cars', 'desde', 'hasta', 'carModels'));
+        $pdf = PDF::loadView('car.pdf', compact('cars', 'desde', 'hasta', 'carModels'))
                ->setPaper('a4', 'landscape');
         return $pdf->download('informe_coches.pdf');
     }
