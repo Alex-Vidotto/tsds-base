@@ -56,6 +56,7 @@
 @endsection
 
 @push('scripts')
+<<<<<<< HEAD
 
 
 <script>
@@ -104,6 +105,7 @@
 </script>
 @endpush
 
+=======
     <script>
         $(document).ready(function() {
             console.log("jQuery LISTO!");

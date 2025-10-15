@@ -16,12 +16,7 @@
                                 {{ __('Fecha') }}
                             </label>
                             <div class="mb-3">
-<<<<<<< HEAD
-                                <input id="fecha_mantenimiento" type="date"
-                                placeholder="Ejemplo: 12/12/2025">
-=======
                                 <input id="fecha_mantenimiento" type="date" name="fecha_mantenimiento" placeholder="Ejemplo: 12/12/2025">
->>>>>>> master
                             </div>
                         </div>
 

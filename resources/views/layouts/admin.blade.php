@@ -168,10 +168,6 @@
         </a>
       </li>
       <li class="nav-item">
-    <button id="dark-mode-toggle" class="btn btn-dark btn-sm" title="Dark Mode">
-        <i class="fas fa-moon"></i>
-    </button>
-</li>
         <button id="dark-mode-toggle" class="btn btn-dark btn-sm" title="Dark Mode">
             <i class="fas fa-moon"></i>
         </button>
