@@ -56,6 +56,56 @@
 @endsection
 
 @push('scripts')
+<<<<<<< HEAD
+
+
+<script>
+  $(document).ready(function() {
+    // Verificá que jQuery está definido
+    if (typeof $ === 'undefined') {
+      console.error('jQuery NO está cargado.');
+      return;
+    }
+    console.log('jQuery cargado OK');
+
+    // Verificá que el formulario existe en el DOM
+    let $form = $('#formNuevaTarea');
+    if ($form.length === 0) {
+      console.error('#formNuevaTarea no existe en el DOM');
+      return;
+    }
+    console.log('Formulario detectado');
+
+    $form.on('submit', function(e) {
+      e.preventDefault();  // previene el envío normal
+      console.log('submit capturado!');
+
+      let titulo = $(this).find('input[name="titulo"]').val();
+
+      $.ajax({
+        url: $(this).attr('action'),
+        method: 'POST',
+        data: {
+          titulo: titulo,
+        },
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+          console.log('respuesta:', response);
+          // Podés recargar la tabla o el contenido
+          // Aquí podés cerrar el modal, etc.
+        },
+        error: function(xhr) {
+          console.error('Error en Ajax:', xhr);
+        }
+      });
+    });
+  });
+</script>
+@endpush
+
+=======
     <script>
         $(document).ready(function() {
             console.log("jQuery LISTO!");

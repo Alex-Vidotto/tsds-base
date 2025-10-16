@@ -81,7 +81,25 @@
                 
             </div>
 
-            </div>
+<div class="form-group col-md-3 d-flex align-items-end">
+    <div class="btn-group" role="group" aria-label="Acciones">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i> Buscar
+        </button>
+
+        
+        <a href="{{ route('cars.pdf', [], false)
+            .  '?desde=' . request('desde')
+            .  '&hasta=' . request('hasta')
+            .  '&car_brand_id=' . request('car_brand_id')}}"
+            class="btn btn-danger" target="_blank">
+            <i class="fas fa-file-pdf"></i>  PDF
+        </a>
+        
+        <a href="{{ route('cars.index') }}" class="btn btn-secondary">
+            <i class="fas fa-eraser"></i> Limpiar
+        </a>
+
     </div>
 </div>
     <div class="mb-3" style="text-align: right;">
