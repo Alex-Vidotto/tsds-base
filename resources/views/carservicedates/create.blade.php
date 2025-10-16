@@ -27,11 +27,7 @@
                                 <option value="">Seleccionar patente</option>
                                 @foreach($cars as $car)
                                 
-<<<<<<< HEAD
-                                    <option value="{{ $car }}">
-=======
                                     <option value="{{ $car->id }}">
->>>>>>> master
                                         {{ $car->matricula }}
                                     </option>
                                 @endforeach                            
@@ -44,11 +40,7 @@
                             <select class="form-select" id="car_service_id" name="car_service_id" required>
                                 <option value="">Seleccione un servicio</option>
                                 @foreach($carservices as $carservice)
-<<<<<<< HEAD
-                                    <option value="{{ $carservice }}">
-=======
                                     <option value="{{ $carservice->id }}">
->>>>>>> master
                                         {{ $carservice->Tipo_servicio }}
                                     </option>
                                 @endforeach                            

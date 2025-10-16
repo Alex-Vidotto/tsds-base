@@ -26,11 +26,11 @@
                 <table class="table table-striped" id="tablaDetalle">
                     <thead>
                         <tr>
-                            <!--<th>ID</th>-->
                             <th>Matrícula</th>
                             <th>Marca</th>
                             <th>Modelo</th>
                             <th>Foto</th>
+                            <th>Estado</th>
                             <th>Fecha Registro</th>
                             <th>Acciones</th>
                         </tr>
@@ -38,7 +38,6 @@
                     <tbody>
                         @forelse($cars as $car)
                         <tr>
-                            <!--<td>{{ $car->id }}</td>-->
                             <td>
                                 <strong>{{ $car->matricula }}</strong>
                             </td>
@@ -56,6 +55,7 @@
                                     <span class="text-muted">Sin foto</span>
                                 @endif
                             </td>
+                            <td>{{ $car->estado}}</th>
                             <td>{{ $car->created_at->format('d/m/Y') }}</td>
                             <td>
                                         <a href = "{{ route('cars.edit', $car->id) }}" class = "btn btn-warning btn-sm">Editar</a>

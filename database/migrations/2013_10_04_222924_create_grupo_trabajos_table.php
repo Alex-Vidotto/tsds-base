@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('grupo_trabajos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->foreignId('car_id')->nullable()->unique()->constrained('cars')->onDelete('set null'); // auto asignado
+            $table->foreignId('car_id')->nullable()->unique()->constrained('cars')->onDelete('cascade'); // auto asignado
             $table->timestamps();
         });
     }

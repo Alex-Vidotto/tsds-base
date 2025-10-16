@@ -122,8 +122,8 @@ class GrupoTrabajoController extends Controller
         \Log::info('Tareas asociadas: ' . $grupoTrabajo->tareas()->count());
         
         // Liberamos relaciones
-        $grupoTrabajo->auto()->dissociate();
-        $grupoTrabajo->save();
+        //$grupoTrabajo->auto()->dissociate();
+        //$grupoTrabajo->save();
         
         $grupoTrabajo->empleados()->detach();
         $grupoTrabajo->tareas()->detach();

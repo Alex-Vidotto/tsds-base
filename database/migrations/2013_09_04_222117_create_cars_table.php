@@ -20,7 +20,7 @@ return new class extends Migration
                     ->constrained('car_models')
                     ->onDelete('restrict');
             $table->string('foto')->nullable();
-            $table->string('estado')->default('disponible');
+            $table->string('estado')->default('Disponible');
             $table->timestamps();
         });
     }
