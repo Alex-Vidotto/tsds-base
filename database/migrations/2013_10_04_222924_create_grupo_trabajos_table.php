@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tareas', function (Blueprint $table) {
+        Schema::create('grupo_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->boolean('completada')->default(false);
+            $table->string('nombre');
+            $table->foreignId('car_id')->nullable()->unique()->constrained('cars')->onDelete('set null'); // auto asignado
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tareas');
+        Schema::dropIfExists('grupo_trabajos');
     }
 };

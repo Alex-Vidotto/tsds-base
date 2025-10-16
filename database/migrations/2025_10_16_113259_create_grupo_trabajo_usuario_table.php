@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('grupo_trabajos', function (Blueprint $table) {
+        Schema::create('grupo_trabajo_usuario', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            //$table->foreignId('car_id')->nullable()->constrained()->onDelete('set null'); // auto asignado
+            $table->foreignId('grupo_trabajo_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unique(['grupo_trabajo_id', 'user_id']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grupo_trabajos');
+        Schema::dropIfExists('grupo_trabajo_usuario');
     }
 };

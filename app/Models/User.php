@@ -28,7 +28,7 @@ class User extends Authenticatable
 
     public function grupoTrabajo()
     {
-        return $this->belongsTo(GrupoTrabajo::class);
+        return $this->belongsToMany(GrupoTrabajo::class, 'grupo_trabajo_usuario');
     }
 
     /**

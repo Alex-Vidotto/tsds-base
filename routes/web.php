@@ -71,5 +71,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/grupotrabajos/{grupotrabajo}', [GrupoTrabajoController::class, 'show'])->name('grupotrabajos.show')->middleware('permission:ver grupo de trabajo');
     Route::get('/grupotrabajos/{grupotrabajo}/edit', [GrupoTrabajoController::class, 'edit'])->name('grupotrabajos.edit')->middleware('permission:editar grupo de trabajo');
     Route::put('/grupotrabajos/{grupotrabajo}', [GrupoTrabajoController::class, 'update'])->name('grupotrabajos.update')->middleware('permission:editar grupo de trabajo');
-    Route::delete('/grupotrabajos/{grupotrabajo}', [GrupoTrabajoController::class, 'destroy'])->name('grupotrabajos.destroy')->middleware('permission:borrar grupo de trabajo');
+    Route::delete('/grupotrabajos/{grupotrabajo}', [GrupoTrabajoController::class, 'destroy'])->name('grupotrabajos.destroy');//->middleware('permission:borrar grupo de trabajo');
+
+    Route::get('grupotrabajos/{grupo}/asignar-tarea', [GrupoTrabajoController::class, 'formAsignarTarea'])->name('grupotrabajos.formAsignarTarea');
+    Route::post('grupotrabajos/{grupo}/asignar-tarea', [GrupoTrabajoController::class, 'asignarTarea'])->name('grupotrabajos.asignarTarea');
+
 });

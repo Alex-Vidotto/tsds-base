@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CarServiceSeeder::class);
         $this->call(CarServiceDateSeeder::class);
         $this->call(TareaSeeder::class);
+        $this->call(GrupoTrabajoSeeder::class);
     }
 }
