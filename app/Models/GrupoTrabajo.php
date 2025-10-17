@@ -19,12 +19,14 @@ class GrupoTrabajo extends Model
     // Relación 1 a muchos con empleados
     public function empleados()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'grupo_trabajo_usuario');
     }
 
     // Relación con tareas 
     public function tareas()
     {
-        return $this->hasMany(Tarea::class);
-    }    
+        return $this->belongsToMany(Tarea::class, 'servicios_asignados')
+                    ->withPivot(['cliente', 'costo_final', 'notas_cliente', 'estado'])
+                    ->withTimestamps();
+    }
 }

@@ -27,5 +27,15 @@ class Car extends Model
                     ->withPivot('fecha_mantenimiento')
                     ->withTimestamps();
     }
+
+    public function grupoTrabajo()
+    {
+        return $this->hasOne(GrupoTrabajo::class, 'car_id');
+    }
+
+    public function fichaTecnica()
+    {
+        return $this->hasOne(FichaTecnica::class);
+    }
 }
 

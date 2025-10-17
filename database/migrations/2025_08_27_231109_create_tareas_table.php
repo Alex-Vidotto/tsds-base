@@ -17,10 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->boolean('completada')->default(false);
-            $table->foreignId('grupo_trabajo_id')
-                  ->nullable()
-                  ->constrained('grupo_trabajos')
-                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
