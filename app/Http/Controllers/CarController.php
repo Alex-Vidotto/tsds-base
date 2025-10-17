@@ -20,7 +20,8 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-        $CarModel = CarModel::with('carBrand')->get();
+        $carBrands = CarBrand::with('carModels')->get();
+        $opciones = $this->prepareModelOptions($carBrands);
     
         $cars = Car::with('carModel.carBrand');
         if ($request->filled('carModel_id')) {
@@ -38,7 +39,7 @@ class CarController extends Controller
         }
         return view('car.index', [
             'cars' => $cars,
-            'carModels' => $CarModel,
+            'opciones' => $opciones,
             'carModel_id' => $request->carModel_id,
             'desde' => $request->desde,
             'hasta' => $request->hasta,
@@ -79,6 +80,13 @@ class CarController extends Controller
             $vehiculo->foto = $file->getClientOriginalName();
         }
         $vehiculo->save();
+        $vehiculo->fichaTecnica()->create([
+            'motor' => $request->motor,
+            'combustible' => $request->combustible,
+            'transmision' => $request->transmision,
+            'color' => $request->color,
+            'anio' => $request->anio,
+        ]);
         return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
         
     }
@@ -157,27 +165,31 @@ class CarController extends Controller
         return $options;
     }
     public function exportPDF(Request $request)
-{
-    $desde = $request->input('desde');
-    $hasta = $request->input('hasta');
-    $carModel_id = $request->input('carModel_id'); // ← Nombre consistente
-    
-    $query = Car::with('carModel.carBrand');
-    
-    if ($desde && $hasta) {
-        $query->whereDate('created_at', '>=', $desde)
-              ->whereDate('created_at', '<=', $hasta);
+    {
+        $desde = $request->input('desde');
+        $hasta = $request->input('hasta');
+        $carModel_id = $request->input('carModel_id'); // ← Nombre consistente
+
+        $query = Car::with('carModel.carBrand');
+
+        if ($desde && $hasta) {
+            $query->whereDate('created_at', '>=', $desde)
+                  ->whereDate('created_at', '<=', $hasta);
+        }
+
+        if ($carModel_id) { // ← Mismo nombre
+            $query->where('car_model_id', $carModel_id);
+            $modelo = CarModel::find($carModel_id); // ← Mismo nombre
+        }
+        else{
+            $modelo = null;
+        }
+
+        $cars = $query->orderBy('created_at', 'desc')->get();
+
+        $pdf = PDF::loadView('car.exportPdf', compact('cars', 'modelo', 'desde', 'hasta'))
+               ->setPaper('a4', 'landscape');
+
+        return $pdf->download('informe_coches.pdf');
     }
-    
-    if ($carModel_id) { // ← Mismo nombre
-        $query->where('car_model_id', $carModel_id); // ← Mismo nombre
-    }
-    
-    $cars = $query->orderBy('created_at', 'desc')->get();
-    
-    $pdf = PDF::loadView('car.pdf', compact('cars', 'desde', 'hasta', 'carModel_id'))
-           ->setPaper('a4', 'landscape');
-    
-    return $pdf->download('informe_coches.pdf');
-}
 }

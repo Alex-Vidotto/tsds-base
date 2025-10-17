@@ -16,6 +16,7 @@
             <h5 class="mb-0">Vehículos Registrados</h5>
         </div>
         <div class="card-body">
+            @include('car.busqueda')
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -81,26 +82,7 @@
                 
             </div>
 
-<div class="form-group col-md-3 d-flex align-items-end">
-    <div class="btn-group" role="group" aria-label="Acciones">
-        <button type="submit" class="btn btn-primary">
-            <i class="fas fa-search"></i> Buscar
-        </button>
 
-        
-        <a href="{{ route('cars.pdf', [], false)
-            .  '?desde=' . request('desde')
-            .  '&hasta=' . request('hasta')
-            .  '&car_brand_id=' . request('car_brand_id')}}"
-            class="btn btn-danger" target="_blank">
-            <i class="fas fa-file-pdf"></i>  PDF
-        </a>
-        
-        <a href="{{ route('cars.index') }}" class="btn btn-secondary">
-            <i class="fas fa-eraser"></i> Limpiar
-        </a>
-
-    </div>
 </div>
     <div class="mb-3" style="text-align: right;">
         <a href="{{ route('carservicedates.index') }}" class="btn btn-primary">

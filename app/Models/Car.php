@@ -32,5 +32,10 @@ class Car extends Model
     {
         return $this->hasOne(GrupoTrabajo::class, 'car_id');
     }
+
+    public function fichaTecnica()
+    {
+        return $this->hasOne(FichaTecnica::class);
+    }
 }
 

@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cars/{car}/edit', [CarController::class, 'edit'])->name('cars.edit')->middleware('permission:editar autos');
     Route::put('/cars/{car}', [CarController::class, 'update'])->name('cars.update')->middleware('permission:editar autos');
     Route::delete('/cars/{car}', [CarController::class, 'destroy'])->name('cars.destroy')->middleware('permission:borrar autos');
-    Route::get('/cars/export-pdf', [App\Http\Controllers\CarController::class, 'exportPDF'])->name('cars.pdf')->middleware('permission:ver autos');
+    Route::get('/cars/export/pdf', [CarController::class, 'exportPDF'])->name('cars.exportPdf')->middleware('permission:ver autos');
 
 
     //Usuarios
