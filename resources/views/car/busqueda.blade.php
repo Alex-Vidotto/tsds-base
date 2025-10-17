@@ -1,13 +1,13 @@
-<div class = "container mt-3">
-    <form action = "{{ route ('cars.index')}}" method = "GET" autocomplete = "on" role = "search">
-        <div class = "row">
-            <div class = "col-lg-3 col-md-4 col-sm-6 mb-3">
-                <label for = "modelo_id" > Modelo</label>
-                <select name = "modelo_id" id = "modelo_id" class = "form-control">
-                    <option value = "">-- Todos los modelos --</option>
-                    @foreach ($modelos as $modelo)
-                        <option value = "{{$modelo->id}}" {{ request('modelo_id') == $modelo->id ? 'selected' : '' }}>
-                        {{ $modelo->nombre }}
+<div class="container mt-3">
+    <form action="{{ route('cars.index') }}" method="GET" autocomplete="on" role="search">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <label for="car_model_id"> Modelo</label>
+                <select name="car_model_id" id="car_model_id" class="form-control">
+                    <option value="">-- Todos los modelos --</option>
+                    @foreach ($opciones as $option)
+                        <option value="{{ $option['id'] }}" {{ request('car_model_id') == $option["id"] ? 'selected' : '' }}>
+                            {{ $option['text'] }}
                         </option>
                     @endforeach
                 </select>
@@ -34,12 +34,17 @@
                 <button type="submit" class="btn btn-primary btn-sm">
                     <i class="fa fa-filter fa-xs"></i> Filtrar
                 </button>  
-<<<<<<< HEAD
-                <a href = "{{ route ('car.index') }}" class = "btn btn-secondary">
-=======
-                <a href = "{{ route ('vehiculos.index') }}" class = "btn btn-secondary">
->>>>>>> 69e6216a9df5ddb61ef6660e54b0a99320bf3b1d
-                    <i class = "fas fa-eraser"></i> Limpiar
+                        
+                <a href="{{ route('cars.exportPdf', [], false)
+                    . '?desde=' . request('desde')
+                    . '&hasta=' . request('hasta')
+                    . '&car_brand_id=' . request('car_brand_id')}}"
+                    class="btn btn-danger btn-sm" target="_blank">
+                    <i class="fas fa-file-pdf fa-xs"></i> PDF
+                </a>
+
+                <a href="{{ route('cars.index') }}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-eraser fa-xs"></i> Limpiar
                 </a>
             </div>
         </div>
