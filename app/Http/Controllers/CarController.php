@@ -49,7 +49,7 @@ class CarController extends Controller
             $desde = null;
             $hasta = null;
         }
-        return view('car.index', compact ('cars','vehiculos',
+        return view('cars.index', compact ('cars','vehiculos',
         'modelos',
         'modelo_id',
         'desde',
