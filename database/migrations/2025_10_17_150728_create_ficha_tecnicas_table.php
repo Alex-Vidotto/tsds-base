@@ -20,7 +20,7 @@ return new class extends Migration
         $table->string('combustible')->nullable();
         $table->string('transmision')->nullable();
         $table->string('color')->nullable();
-        $table->year('año')->nullable();
+        $table->year('anio')->nullable();
         $table->timestamps();
     });
     }

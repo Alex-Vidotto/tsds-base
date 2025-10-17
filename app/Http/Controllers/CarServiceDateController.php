@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateCarServiceDateRequest;
 use App\Models\Car;
 use App\Models\CarService;
 
+
 class CarServiceDateController extends Controller
 {
     /**
@@ -18,7 +19,8 @@ class CarServiceDateController extends Controller
      */
     public function index()
     {
-        $carservicedates = CarServiceDate::with('car.carService')->get();
+        //$carservicedates = CarServiceDate::with('car.carService')->get();
+        $carservicedates = CarServiceDate::whereDate('fecha_mantenimiento', '>=', today())->get();
         return view('carservicedates.index', compact('carservicedates'));
     }
 
@@ -31,7 +33,9 @@ class CarServiceDateController extends Controller
     {
         $cars = Car::all();
         $carservices = CarService::all();
-        return view('carservicedates.create', compact('cars', 'carservices'));
+        $fechasBloqueadas = CarServiceDate::orderBy('fecha_mantenimiento', 'asc')->pluck('fecha_mantenimiento')->toArray();
+
+        return view('carservicedates.create', compact('cars', 'carservices', 'fechasBloqueadas'));
     }
 
     /**
@@ -42,6 +46,7 @@ class CarServiceDateController extends Controller
      */
     public function store(StoreCarServiceDateRequest $request)
     {
+        
         $validated = $request->validated();
         CarServiceDate::create($validated);
 

@@ -17,7 +17,7 @@ class FichaTecnica extends Model
         'combustible',
         'transmision',
         'color',
-        'año',
+        'anio',
     ];
 
     public function car()
