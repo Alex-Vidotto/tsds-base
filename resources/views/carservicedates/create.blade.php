@@ -46,7 +46,7 @@
                             <label for="car_id" class="form-label fw-bold text-primary">
                                 <i class="fas fa-car me-1"></i> Vehículo
                             </label>
-                            <select class="form-select @error('car_id') is-invalid @enderror" id="car_id" name="car_id">
+                            <select class="form-control @error('car_id') is-invalid @enderror" id="car_id" name="car_id">
                                 <option value="">Seleccionar patente</option>
                                 @foreach($cars as $car)
                                     <option value="{{ $car->id }}" {{ old('car_id') == $car->id ? 'selected' : '' }}>
@@ -64,7 +64,7 @@
                             <label for="car_service_id" class="form-label fw-bold text-primary">
                                 <i class="fas fa-wrench me-1"></i> Tipo de servicio
                             </label>
-                            <select class="form-select @error('car_service_id') is-invalid @enderror" id="car_service_id" name="car_service_id">
+                            <select class="form-control @error('car_service_id') is-invalid @enderror" id="car_service_id" name="car_service_id">
                                 <option value="">Seleccione un servicio</option>
                                 @foreach($carservices as $carservice)
                                     <option value="{{ $carservice->id }}" {{ old('car_service_id') == $carservice->id ? 'selected' : '' }}>
