@@ -38,7 +38,10 @@
                     </td>
                     <td>
                         @forelse($grupo->tareas as $tarea)
-                            <span class="badge bg-info">{{ $tarea->titulo }}</span>
+                            <div class="mb-1">
+                                <span class="badge bg-info">{{ $tarea->titulo }}</span>
+                                <small class="text-muted">({{ $tarea->pivot->cliente }})</small>
+                            </div>
                         @empty
                             <em>Sin tareas</em>
                         @endforelse
@@ -49,11 +52,17 @@
                     <td>
                         <a href="{{ route('grupotrabajos.show', $grupo) }}" class="btn btn-sm btn-outline-primary">Ver</a>
                         <a href="{{ route('grupotrabajos.edit', $grupo) }}" class="btn btn-sm btn-outline-warning">Editar</a>
-                        <form action="{{ route('grupotrabajos.destroy', $grupo) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Eliminar este grupo?')">
+                        <form action="{{ route('grupotrabajos.destroy', $grupo->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" 
+                                    onclick="return confirm('¿Estás seguro de eliminar el grupo {{  $grupo->nombre  }}?')">
+                                Eliminar
+                            </button>
                         </form>
+                        <a href="{{ route('grupotrabajos.formAsignarTarea', $grupo) }}" class="btn btn-sm btn-outline-success">
+                            Asignar tarea
+                        </a>                        
                     </td>
                 </tr>
             @empty

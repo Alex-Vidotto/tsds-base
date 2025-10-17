@@ -18,7 +18,7 @@ class GrupoTrabajoPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->hasRole('admin');
     }
 
     /**

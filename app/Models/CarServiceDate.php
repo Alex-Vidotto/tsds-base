@@ -10,7 +10,8 @@ class CarServiceDate extends Model
     use HasFactory;
     protected $fillable = ['fecha_mantenimiento',
     'car_id',
-    'car_service_id'];
+    'car_service_id',
+    'estado'];
 
 
     // un registro tiene muchos servicios y muchos autos repetidos

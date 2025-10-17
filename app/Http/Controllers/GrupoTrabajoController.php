@@ -7,6 +7,7 @@ use App\Http\Requests\StoreGrupoTrabajoRequest;
 use App\Http\Requests\UpdateGrupoTrabajoRequest;
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Tarea;
 
 
 class GrupoTrabajoController extends Controller
@@ -29,8 +30,10 @@ class GrupoTrabajoController extends Controller
      */
     public function create()
     {
-        $autos = Car::all();
-        $empleados = User::role('empleado')->whereNull('grupo_trabajo_id')->get(); // solo los libres
+        $autos = Car::whereDoesntHave('grupoTrabajo')->get();
+        $empleados = User::role('empleado')
+            ->whereDoesntHave('grupoTrabajo')
+            ->get();
         return view('grupotrabajos.create', compact('autos', 'empleados'));
     }
 
@@ -53,8 +56,9 @@ class GrupoTrabajoController extends Controller
     
         // Asignar empleados
         if ($request->filled('empleados')) {
-            User::whereIn('id', $request->empleados)->update(['grupo_trabajo_id' => $grupo->id]);
+            $grupo->empleados()->sync($request->empleados);
         }
+        //->update(['grupo_trabajo_id' => $grupo->id])
     
         return redirect()->route('grupotrabajos.index')->with('success', 'Grupo creado correctamente.');
     }
@@ -94,7 +98,6 @@ class GrupoTrabajoController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'nullable|string',
             'car_id' => 'nullable|exists:cars,id',
         ]);
 
@@ -111,21 +114,52 @@ class GrupoTrabajoController extends Controller
      */
     public function destroy(GrupoTrabajo $grupoTrabajo)
     {
-        \Log::info('Eliminando grupo ID: ' . $grupoTrabajo->id);
+       \Log::info('Intentando eliminar grupo: ' . $grupoTrabajo->id);
         
-        // Guardar el ID para logging
-        $grupoId = $grupoTrabajo->id;
+        // Verificamos si tiene relaciones activas
+        \Log::info('Auto asociado: ' . ($grupoTrabajo->car_id ?? 'ninguno'));
+        \Log::info('Empleados asociados: ' . $grupoTrabajo->empleados()->count());
+        \Log::info('Tareas asociadas: ' . $grupoTrabajo->tareas()->count());
         
-        // Liberar relaciones
-        $grupoTrabajo->empleados()->update(['grupo_trabajo_id' => null]);
-        $grupoTrabajo->tareas()->update(['grupo_trabajo_id' => null]);
+        // Liberamos relaciones
+        //$grupoTrabajo->auto()->dissociate();
+        //$grupoTrabajo->save();
         
-        // Eliminar
-        $grupoTrabajo->delete();
+        $grupoTrabajo->empleados()->detach();
+        $grupoTrabajo->tareas()->detach();
         
-        \Log::info("Grupo {$grupoId} eliminado - Redirigiendo a index");
+        // Intentamos eliminar
+        $resultado = $grupoTrabajo->delete();
         
-        return redirect()->route('grupotrabajos.index')
-                        ->with('success', "Grupo #{$grupoId} eliminado correctamente.");
-    }  
+        \Log::info('Resultado de delete(): ' . ($resultado ? 'true' : 'false'));
+        
+        dd('Método destroy ejecutado, resultado: ' . ($resultado ? 'true' : 'false'));
+        return redirect()->route('grupotrabajos.index')->with('success', 'Grupo actualizado correctamente.');
+    }
+
+    public function formAsignarTarea(GrupoTrabajo $grupo)
+    {
+        $tareas = Tarea::all();
+        return view('grupotrabajos.asignar-tarea', compact('grupo', 'tareas'));
+    }
+
+    public function asignarTarea(Request $request, GrupoTrabajo $grupo)
+    {
+        $request->validate([
+            'tarea_id' => 'required|exists:tareas,id',
+            'cliente' => 'required|string|max:255',
+            'costo_final' => 'required|numeric|min:0',
+            'notas_cliente' => 'nullable|string',
+            'estado' => 'required|in:pendiente,en_proceso,completado',
+        ]);
+
+        $grupo->tareas()->attach($request->tarea_id, [
+            'cliente' => $request->cliente,
+            'costo_final' => $request->costo_final,
+            'notas_cliente' => $request->notas_cliente,
+            'estado' => $request->estado,
+        ]);
+
+        return redirect()->route('grupotrabajos.show', $grupo)->with('success', 'Tarea asignada correctamente.');
+    }
 }

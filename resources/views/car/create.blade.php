@@ -51,6 +51,23 @@
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
+                        <h4>Ficha Técnica</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Motor</label>
+                                <input type="text" name="motor" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Combustible</label>
+                                <input type="text" name="combustible" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Transmisión</label>
+                                <input type="text" name="transmision" class="form-control">
+                            </div>
+                            <!-- Más campos si querés -->
+                        </div>
+
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Crear Vehículo</button>
                         </div>
