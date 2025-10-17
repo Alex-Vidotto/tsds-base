@@ -1,5 +1,5 @@
 <div class = "container mt-3">
-    <form action = "{{ route ('vehiculos.index')}}" method = "GET" autocomplete = "on" role = "search">
+    <form action = "{{ route ('cars.index')}}" method = "GET" autocomplete = "on" role = "search">
         <div class = "row">
             <div class = "col-lg-3 col-md-4 col-sm-6 mb-3">
                 <label for = "modelo_id" > Modelo</label>
