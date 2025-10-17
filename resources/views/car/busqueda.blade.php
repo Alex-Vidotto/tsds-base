@@ -34,7 +34,7 @@
                 <button type="submit" class="btn btn-primary btn-sm">
                     <i class="fa fa-filter fa-xs"></i> Filtrar
                 </button>  
-                <a href = "{{ route ('vehiculos.index') }}" class = "btn btn-secondary">
+                <a href = "{{ route ('car.index') }}" class = "btn btn-secondary">
                     <i class = "fas fa-eraser"></i> Limpiar
                 </a>
             </div>
