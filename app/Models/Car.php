@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class Car extends Model
 {
@@ -37,5 +39,19 @@ class Car extends Model
     {
         return $this->hasOne(FichaTecnica::class);
     }
+
+    public function actualizarEstado()
+    {
+        $ultimo = $this->carServiceDates()->orderByDesc('fecha_mantenimiento')->first();
+
+        if ($ultimo && Carbon::parse($ultimo->fecha_mantenimiento)->isFuture()) {
+            $this->estado = 'En mantenimiento';
+        } else {
+            $this->estado = 'Disponible';
+        }
+
+        $this->save();
+    }
+
 }
 

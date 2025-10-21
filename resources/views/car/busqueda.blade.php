@@ -13,6 +13,17 @@
                 </select>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <label for="car_service_id">Tipo de Mantenimiento</label>
+                <select name="car_service_id" id="car_service_id" class="form-control">
+                    <option value="">-- Todos los tipos --</option>
+                    @foreach ($tiposServicio as $servicio)
+                        <option value="{{ $servicio->id }}" {{ request('car_service_id') == $servicio->id ? 'selected' : '' }}>
+                            {{ $servicio->Tipo_servicio }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                 <label for="desde"> Fecha Desde </label>
                 <input
                     type="date"
@@ -38,7 +49,8 @@
                 <a href="{{ route('cars.exportPdf', [], false)
                     . '?desde=' . request('desde')
                     . '&hasta=' . request('hasta')
-                    . '&car_brand_id=' . request('car_brand_id')}}"
+                    . '&car_model_id=' . request('car_model_id')
+                    . '&car_service_id=' . request('car_service_id')}}"
                     class="btn btn-danger btn-sm" target="_blank">
                     <i class="fas fa-file-pdf fa-xs"></i> PDF
                 </a>

@@ -9,7 +9,9 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\CarBrand;
 use App\Models\CarModel;
+use App\Models\CarService;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class CarController extends Controller
 {
@@ -22,10 +24,17 @@ class CarController extends Controller
     {
         $carBrands = CarBrand::with('carModels')->get();
         $opciones = $this->prepareModelOptions($carBrands);
+        $tiposServicio = CarService::all();
+
     
-        $cars = Car::with('carModel.carBrand');
-        if ($request->filled('carModel_id')) {
-            $cars->where('car_model_id', $request->carModel_id);
+        $cars = Car::with(['carModel.carBrand', 'carServiceDates.carService']);
+        if ($request->filled('car_model_id')) {
+            $cars->where('car_model_id', $request->car_model_id);
+        }
+        if ($request->filled('car_service_id')) {
+            $cars->whereHas('carServiceDates', function ($query) use ($request) {
+                $query->where('car_service_id', $request->car_service_id);
+            });
         }
         if ($request->filled('desde')) {
             $cars->whereDate('created_at', '>=', $request->desde);
@@ -37,9 +46,14 @@ class CarController extends Controller
         if ($request->has('pdf')) {
             return $this->exportPDF($request);
         }
+        $cars->getCollection()->each(function ($car) {
+            $car->actualizarEstado();
+        });
+
         return view('car.index', [
             'cars' => $cars,
             'opciones' => $opciones,
+            'tiposServicio' => $tiposServicio,
             'carModel_id' => $request->carModel_id,
             'desde' => $request->desde,
             'hasta' => $request->hasta,
@@ -167,9 +181,15 @@ class CarController extends Controller
     {
         $desde = $request->input('desde');
         $hasta = $request->input('hasta');
-        $carModel_id = $request->input('carModel_id'); // ← Nombre consistente
+        $carModel_id = $request->input('car_model_id'); // ← Nombre consistente
 
-        $query = Car::with('carModel.carBrand');
+        $query = Car::with(['carModel.carBrand', 'fichaTecnica', 'carServiceDates.carService']);
+
+        if ($request->filled('car_service_id')) {
+            $query->whereHas('carServiceDates', function ($q) use ($request) {
+                $q->where('car_service_id', $request->car_service_id);
+            });
+        }
 
         if ($desde && $hasta) {
             $query->whereDate('created_at', '>=', $desde)
