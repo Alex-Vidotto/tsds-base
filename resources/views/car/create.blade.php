@@ -146,6 +146,9 @@
 
                         <!-- Botón de envío -->
                         <div class="d-flex justify-content-end mt-4">
+                            <a href="{{ route('cars.index') }}" class="btn btn-outline-secondary shadow-sm mr-2">
+                                <i class="fas fa-arrow-left mr-1"></i> Volver
+                            </a>
                             <button type="submit" class="btn btn-primary px-4">
                                 <i class="fas fa-plus-circle mr-1"></i> Crear Vehículo
                             </button>

@@ -29,7 +29,7 @@
             @endif
 
             <div class="table-responsive mt-3">
-                <table class="table table-hover table-sm align-middle mb-0">
+                <table class="table table-hover table-sm align-middle mb-0" id="tablaDetalle">
                     <thead class="table-light">
                         <tr>
                             <th scope="col">Matrícula</th>
