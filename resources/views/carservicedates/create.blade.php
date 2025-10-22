@@ -69,7 +69,7 @@
                             <label for="car_service_id" class="font-weight-bold text-primary">
                                 <i class="fas fa-wrench mr-1"></i> Tipo de servicio
                             </label>
-                            <select class="form-control{{ $errors->has('car_service_id') ? ' is-invalid' : '' }}" id="car_service_id" name="car_service_id">
+                            <select class="select2-prueba form-control @error('car_service_id') is-invalid @enderror" id="car_service_id" name="car_service_id">
                                 <option value="">Seleccione un servicio</option>
                                 @foreach($carservices as $carservice)
                                     <option value="{{ $carservice->id }}" {{ old('car_service_id') == $carservice->id ? 'selected' : '' }}>
@@ -97,4 +97,18 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+
 @endsection
+@push('scripts')
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.select2-prueba').select2();
+});
+
+    </script>
+@endpush
+=======
+@endsection
+>>>>>>> 71e6f816f1e67ae684ab3edfaaed060b09c4a368
