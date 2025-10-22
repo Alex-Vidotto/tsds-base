@@ -78,7 +78,10 @@ class CarServiceDateController extends Controller
      */
     public function edit(CarServiceDate $carServiceDate)
     {
-        //
+        $cars = Car::all();
+        $carServices = CarService::all();
+        
+        return view('carservicedates.edit', compact('carServiceDate', 'cars', 'carServices'));
     }
 
     /**
@@ -90,7 +93,31 @@ class CarServiceDateController extends Controller
      */
     public function update(UpdateCarServiceDateRequest $request, CarServiceDate $carServiceDate)
     {
-        //
+        $validated = $request->validated();
+        
+        // Guardar el estado anterior para comparar
+        $carIdAnterior = $carServiceDate->car_id;
+        
+        // Actualizar el mantenimiento
+        $carServiceDate->update($validated);
+        
+        // Actualizar estado del carro actual
+        $carActual = $carServiceDate->car;
+        if ($carActual) {
+            $carActual->estado = 'En mantenimiento';
+            $carActual->save();
+        }
+
+        // Si cambió de carro, actualizar también el carro anterior
+        if ($carIdAnterior != $validated['car_id']) {
+            $carAnterior = Car::find($carIdAnterior);
+            if ($carAnterior) {
+                $carAnterior->actualizarEstado(); // Restablecer estado según sus mantenimientos
+                $carAnterior->save();
+            }
+        }
+
+        return redirect()->route('carservicedates.index')->with('success', 'Mantenimiento actualizado exitosamente.');
     }
 
     /**

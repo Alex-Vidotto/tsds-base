@@ -42,10 +42,22 @@ class Car extends Model
 
     public function actualizarEstado()
     {
-        $ultimo = $this->carServiceDates()->orderByDesc('fecha_mantenimiento')->first();
+        $hoy = Carbon::today();
+        $limiteFuturo = $hoy->copy()->addDays(7); 
+        
+        $mantenimientoHoy = $this->carServiceDates()
+            ->whereDate('fecha_mantenimiento', $hoy)
+            ->exists();
 
-        if ($ultimo && Carbon::parse($ultimo->fecha_mantenimiento)->isFuture()) {
+        $mantenimientoProximo = $this->carServiceDates()
+            ->whereDate('fecha_mantenimiento', '>', $hoy)
+            ->whereDate('fecha_mantenimiento', '<=', $limiteFuturo)
+            ->exists();
+
+        if ($mantenimientoHoy) {
             $this->estado = 'En mantenimiento';
+        } elseif ($mantenimientoProximo) {
+            $this->estado = 'Mantenimiento programado'; 
         } else {
             $this->estado = 'Disponible';
         }
