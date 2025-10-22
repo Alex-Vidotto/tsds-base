@@ -97,18 +97,4 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-
 @endsection
-@push('scripts')
-    <script>
-        // In your Javascript (external .js resource or <script> tag)
-$(document).ready(function() {
-    $('.select2-prueba').select2();
-});
-
-    </script>
-@endpush
-=======
-@endsection
->>>>>>> 71e6f816f1e67ae684ab3edfaaed060b09c4a368

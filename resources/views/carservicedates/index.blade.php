@@ -63,7 +63,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('carservicedates.', $carservicedate->id) }}" class="btn btn-sm btn-outline-primary">
+                                    <a href="{{ route('carservicedates.edit', $carservicedate->id) }}" class="btn btn-sm btn-outline-primary">
                                         <i class="fas fa-edit mr-1"></i> Editar
                                     </a>
                                 </td>
