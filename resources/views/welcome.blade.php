@@ -64,7 +64,6 @@
     <div class="welcome-box">
         <img src="{{ asset('images/logo.png') }}" alt="Logo Seven">
         <h1>Bienvenido a Seven y-Eleven</h1>
-        <p>Tu entorno está funcionando correctamente.</p>
         <a href="{{ route('login') }}" class="btn">Iniciar Sesión</a>
         <a href="{{ route('register') }}" class="btn">Registrarse</a>
     </div>
