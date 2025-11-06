@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\GrupoTrabajo;
 use App\Models\Tarea;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class GrupoTrabajoController extends Controller
 {
