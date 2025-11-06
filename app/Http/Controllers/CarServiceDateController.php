@@ -95,24 +95,21 @@ class CarServiceDateController extends Controller
     {
         $validated = $request->validated();
         
-        // Guardar el estado anterior para comparar
         $carIdAnterior = $carServiceDate->car_id;
         
-        // Actualizar el mantenimiento
         $carServiceDate->update($validated);
         
-        // Actualizar estado del carro actual
         $carActual = $carServiceDate->car;
         if ($carActual) {
             $carActual->estado = 'En mantenimiento';
             $carActual->save();
         }
 
-        // Si cambió de carro, actualizar también el carro anterior
+
         if ($carIdAnterior != $validated['car_id']) {
             $carAnterior = Car::find($carIdAnterior);
             if ($carAnterior) {
-                $carAnterior->actualizarEstado(); // Restablecer estado según sus mantenimientos
+                $carAnterior->actualizarEstado(); 
                 $carAnterior->save();
             }
         }
