@@ -92,7 +92,7 @@ class GrupoTrabajoController extends Controller
         public function edit($id)
         {
             $grupoTrabajo = GrupoTrabajo::findOrFail($id);
-            $autos = Car::all();
+                    $autos = Car::whereDoesntHave('grupoTrabajo')->orWhere('id', $grupoTrabajo->car_id)->get();
             $empleados = User::role('empleado')
                 ->whereDoesntHave('grupoTrabajo')
                 ->get();
