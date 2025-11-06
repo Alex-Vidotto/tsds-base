@@ -76,8 +76,9 @@ class GrupoTrabajoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(GrupoTrabajo $grupoTrabajo)
+    public function show($id)
     {
+        $grupoTrabajo = GrupoTrabajo::findOrFail($id);
         $grupoTrabajo->load(['auto', 'empleados', 'tareas']);
 
         return view('grupotrabajos.show', compact('grupoTrabajo'));
@@ -88,23 +89,25 @@ class GrupoTrabajoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(GrupoTrabajo $grupoTrabajo)
-    {
-        $autos = Car::all();
-        $empleados = User::role('empleado')
-            ->whereDoesntHave('grupoTrabajo')
-            ->get();
-
-        return view('grupotrabajos.edit', compact('grupoTrabajo', 'autos', 'empleados'));
-    }
+        public function edit($id)
+        {
+            $grupoTrabajo = GrupoTrabajo::findOrFail($id);
+            $autos = Car::all();
+            $empleados = User::role('empleado')
+                ->whereDoesntHave('grupoTrabajo')
+                ->get();
+    
+            return view('grupotrabajos.edit', compact('grupoTrabajo', 'autos', 'empleados'));
+        }
 
     /**
      * Update the specified resource in storage.
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGrupoTrabajoRequest $request, GrupoTrabajo $grupoTrabajo)
+    public function update(UpdateGrupoTrabajoRequest $request, $id)
     {
+        $grupoTrabajo = GrupoTrabajo::findOrFail($id);
         $request->validate([
             'nombre' => 'required|string|max:255',
             'car_id' => 'nullable|exists:cars,id',
@@ -121,8 +124,9 @@ class GrupoTrabajoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GrupoTrabajo $grupoTrabajo)
+    public function destroy($id)
     {
+        $grupoTrabajo = GrupoTrabajo::findOrFail($id);
         // Liberamos relaciones
         $grupoTrabajo->empleados()->detach();
         $grupoTrabajo->tareas()->detach();
