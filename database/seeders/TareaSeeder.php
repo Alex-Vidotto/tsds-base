@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Tarea;
+use Illuminate\Database\Seeder;
 
 class TareaSeeder extends Seeder
 {

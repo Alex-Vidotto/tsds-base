@@ -31,13 +31,14 @@ class StoreCarServiceDateRequest extends FormRequest
                 'after_or_equal:today',
                 Rule::unique('car_service_dates')->where(function ($query) {
                     return $query->where('car_id', $this->car_id)
-                                 ->whereDate('fecha_mantenimiento', $this->fecha_mantenimiento);
+                        ->whereDate('fecha_mantenimiento', $this->fecha_mantenimiento);
                 }),
             ],
             'car_id' => 'required|exists:cars,id',
-            'car_service_id' => 'required|exists:car_services,id',            
+            'car_service_id' => 'required|exists:car_services,id',
         ];
     }
+
     public function messages()
     {
         return [

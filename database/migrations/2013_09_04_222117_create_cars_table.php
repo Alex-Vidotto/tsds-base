@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('matricula')->unique();
             $table->foreignId('car_model_id')
-                    ->constrained('car_models')
-                    ->onDelete('cascade');
+                ->constrained('car_models')
+                ->onDelete('cascade');
             $table->string('foto')->nullable();
             $table->string('estado')->default('Disponible');
             $table->timestamps();

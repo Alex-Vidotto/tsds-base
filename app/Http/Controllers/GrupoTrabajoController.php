@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GrupoTrabajo;
 use App\Http\Requests\StoreGrupoTrabajoRequest;
 use App\Http\Requests\UpdateGrupoTrabajoRequest;
 use App\Models\Car;
-use App\Models\User;
+use App\Models\GrupoTrabajo;
 use App\Models\Tarea;
-
+use App\Models\User;
 
 class GrupoTrabajoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ver grupo de trabajo', ['only' => ['index', 'show']]);
+        $this->middleware('permission:crear grupo de trabajo', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar grupo de trabajo', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar grupo de trabajo', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +27,7 @@ class GrupoTrabajoController extends Controller
     public function index()
     {
         $grupos = GrupoTrabajo::with(['auto', 'empleados', 'tareas'])->get();
+
         return view('grupotrabajos.index', compact('grupos'));
     }
 
@@ -34,13 +42,13 @@ class GrupoTrabajoController extends Controller
         $empleados = User::role('empleado')
             ->whereDoesntHave('grupoTrabajo')
             ->get();
+
         return view('grupotrabajos.create', compact('autos', 'empleados'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreGrupoTrabajoRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreGrupoTrabajoRequest $request)
@@ -51,47 +59,48 @@ class GrupoTrabajoController extends Controller
             'empleados' => 'nullable|array',
             'empleados.*' => 'exists:users,id',
         ]);
-    
+
         $grupo = GrupoTrabajo::create($request->only('nombre', 'car_id'));
-    
+
         // Asignar empleados
         if ($request->filled('empleados')) {
             $grupo->empleados()->sync($request->empleados);
         }
-        //->update(['grupo_trabajo_id' => $grupo->id])
-    
+        // ->update(['grupo_trabajo_id' => $grupo->id])
+
         return redirect()->route('grupotrabajos.index')->with('success', 'Grupo creado correctamente.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GrupoTrabajo  $grupoTrabajo
      * @return \Illuminate\Http\Response
      */
     public function show(GrupoTrabajo $grupoTrabajo)
     {
         $grupoTrabajo->load(['auto', 'empleados', 'tareas']);
+
         return view('grupotrabajos.show', compact('grupoTrabajo'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GrupoTrabajo  $grupoTrabajo
      * @return \Illuminate\Http\Response
      */
     public function edit(GrupoTrabajo $grupoTrabajo)
     {
         $autos = Car::all();
-        return view('grupotrabajos.edit', compact('grupoTrabajo', 'autos'));
+        $empleados = User::role('empleado')
+            ->whereDoesntHave('grupoTrabajo')
+            ->get();
+
+        return view('grupotrabajos.edit', compact('grupoTrabajo', 'autos', 'empleados'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateGrupoTrabajoRequest  $request
-     * @param  \App\Models\GrupoTrabajo  $grupoTrabajo
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateGrupoTrabajoRequest $request, GrupoTrabajo $grupoTrabajo)
@@ -99,6 +108,7 @@ class GrupoTrabajoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'car_id' => 'nullable|exists:cars,id',
+            'empleados' => 'nullable|array',
         ]);
 
         $grupoTrabajo->update($request->only('nombre', 'car_id'));
@@ -109,37 +119,24 @@ class GrupoTrabajoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GrupoTrabajo  $grupoTrabajo
      * @return \Illuminate\Http\Response
      */
     public function destroy(GrupoTrabajo $grupoTrabajo)
     {
-       \Log::info('Intentando eliminar grupo: ' . $grupoTrabajo->id);
-        
-        // Verificamos si tiene relaciones activas
-        \Log::info('Auto asociado: ' . ($grupoTrabajo->car_id ?? 'ninguno'));
-        \Log::info('Empleados asociados: ' . $grupoTrabajo->empleados()->count());
-        \Log::info('Tareas asociadas: ' . $grupoTrabajo->tareas()->count());
-        
         // Liberamos relaciones
-        //$grupoTrabajo->auto()->dissociate();
-        //$grupoTrabajo->save();
-        
         $grupoTrabajo->empleados()->detach();
         $grupoTrabajo->tareas()->detach();
-        
-        // Intentamos eliminar
-        $resultado = $grupoTrabajo->delete();
-        
-        \Log::info('Resultado de delete(): ' . ($resultado ? 'true' : 'false'));
-        
-        dd('Método destroy ejecutado, resultado: ' . ($resultado ? 'true' : 'false'));
-        return redirect()->route('grupotrabajos.index')->with('success', 'Grupo actualizado correctamente.');
+
+        // Eliminamos el grupo
+        $grupoTrabajo->delete();
+
+        return redirect()->route('grupotrabajos.index')->with('success', 'Grupo eliminado correctamente.');
     }
 
     public function formAsignarTarea(GrupoTrabajo $grupo)
     {
         $tareas = Tarea::all();
+
         return view('grupotrabajos.asignar-tarea', compact('grupo', 'tareas'));
     }
 

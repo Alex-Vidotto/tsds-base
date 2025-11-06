@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -20,7 +19,7 @@ class RoleSeeder extends Seeder
         Permission::findOrCreate('crear servicios');
         Permission::findOrCreate('editar servicios');
         Permission::findOrCreate('borrar servicios');
-        
+
         Permission::findOrCreate('ver autos');
         Permission::findOrCreate('crear autos');
         Permission::findOrCreate('editar autos');
@@ -35,7 +34,7 @@ class RoleSeeder extends Seeder
         Permission::findOrCreate('crear grupo de trabajo');
         Permission::findOrCreate('editar grupo de trabajo');
         Permission::findOrCreate('borrar grupo de trabajo');
-        
+
         Permission::findOrCreate('ver tareas');
         Permission::findOrCreate('crear tareas');
         Permission::findOrCreate('editar tareas');
@@ -51,11 +50,11 @@ class RoleSeeder extends Seeder
         Permission::findOrCreate('editar grupo de trabajo');
         Permission::findOrCreate('borrar grupo de trabajo');
 
-        //crear roles
+        // crear roles
         $admin = Role::findOrCreate('admin');
         $empleado = Role::findOrCreate('empleado');
 
-        //asignar permiso
+        // asignar permiso
         $admin->givePermissionTo(Permission::all());
         $empleado->givePermissionTo([
             'ver servicios',

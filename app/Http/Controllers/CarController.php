@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Car;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Models\Car;
 use App\Models\CarBrand;
 use App\Models\CarModel;
 use App\Models\CarService;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ver autos', ['only' => ['index', 'show', 'exportPDF']]);
+        $this->middleware('permission:crear autos', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar autos', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar autos', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,6 @@ class CarController extends Controller
         $opciones = $this->prepareModelOptions($carBrands);
         $tiposServicio = CarService::all();
 
-    
         $cars = Car::with(['carModel.carBrand', 'carServiceDates.carService']);
         if ($request->filled('car_model_id')) {
             $cars->where('car_model_id', $request->car_model_id);
@@ -59,6 +64,7 @@ class CarController extends Controller
             'hasta' => $request->hasta,
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -66,29 +72,28 @@ class CarController extends Controller
      */
     public function create()
     {
-       
-        $carBrands  = CarBrand::with('carModels')->get();
+
+        $carBrands = CarBrand::with('carModels')->get();
         $opciones = $this->prepareModelOptions($carBrands);
+
         return view('car.create', compact('opciones'));
 
     }
-    
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCarRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCarRequest $request)
     {
-        $vehiculo = new Car();
+        $vehiculo = new Car;
         $vehiculo->matricula = $request->matricula;
         $vehiculo->car_model_id = $request->car_model_id;
-        
-        if($request->hasFile('foto')){
+
+        if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
+            $file->move(public_path().'/images/vehiculos/', $file->getClientOriginalName());
 
             $vehiculo->foto = $file->getClientOriginalName();
         }
@@ -100,14 +105,14 @@ class CarController extends Controller
             'color' => $request->color,
             'anio' => $request->anio,
         ]);
+
         return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
-        
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
     public function show(Car $car)
@@ -118,21 +123,18 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
     public function edit(Car $car)
     {
         $carModels = \App\Models\CarModel::with('carBrand')->get();
-        
+
         return view('car.edit', compact('car', 'carModels'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCarRequest  $request
-     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCarRequest $request, Car $car)
@@ -140,66 +142,68 @@ class CarController extends Controller
         $car->matricula = $request->matricula;
         $car->car_model_id = $request->car_model_id;
 
-        if($request->hasFile('foto')){
+        if ($request->hasFile('foto')) {
             $file = $request->file('foto');
-            $file->move(public_path().'/images/vehiculos/',$file->getClientOriginalName());
+            $file->move(public_path().'/images/vehiculos/', $file->getClientOriginalName());
 
             $car->foto = $file->getClientOriginalName();
         }
         $car->save();
+
         return redirect()->route('cars.index')->with('success', 'Coche actualizado con éxito.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
     public function destroy(Car $car)
     {
         $car->delete();
+
         return redirect()->route('cars.index')->with('success', 'Eliminado con éxito.');
     }
-
 
     private function prepareModelOptions($carBrands)
     {
         $options = [];
-        
+
         foreach ($carBrands as $brand) {
             foreach ($brand->carModels as $model) {
                 $options[] = [
                     'id' => $model->id,
-                    'text' => $model->nombre . ' - ' . $brand->nombre
+                    'text' => $model->nombre.' - '.$brand->nombre,
                 ];
             }
         }
+
         return $options;
     }
+
     public function exportPDF(Request $request)
     {
         $desde = $request->input('desde');
         $hasta = $request->input('hasta');
         $carModel_id = $request->input('car_model_id');
-    
+
         $query = Car::with(['carModel.carBrand', 'fichaTecnica', 'carServiceDates.carService']);
-    
+
         // Filtro por tipo de mantenimiento
         if ($request->filled('car_service_id')) {
             $query->whereHas('carServiceDates', function ($q) use ($request) {
                 $q->where('car_service_id', $request->car_service_id);
             });
         }
-    
+
         // Filtro por fechas de mantenimiento
         if ($desde && $hasta) {
             $query->whereHas('carServiceDates', function ($q) use ($desde, $hasta) {
                 $q->whereDate('fecha_mantenimiento', '>=', $desde)
-                  ->whereDate('fecha_mantenimiento', '<=', $hasta);
+                    ->whereDate('fecha_mantenimiento', '<=', $hasta);
             });
         }
-    
+
         // Filtro por modelo
         if ($carModel_id) {
             $query->where('car_model_id', $carModel_id);
@@ -207,15 +211,15 @@ class CarController extends Controller
         } else {
             $modelo = null;
         }
-    
+
         // Filtro adicional: solo vehículos con al menos un mantenimiento registrado
         $query->whereHas('carServiceDates');
-    
+
         $cars = $query->orderBy('created_at', 'desc')->get();
-    
+
         $pdf = PDF::loadView('car.exportPdf', compact('cars', 'modelo', 'desde', 'hasta'))
-                 ->setPaper('a4', 'landscape');
-    
+            ->setPaper('a4', 'landscape');
+
         return $pdf->download('informe_coches.pdf');
     }
 }

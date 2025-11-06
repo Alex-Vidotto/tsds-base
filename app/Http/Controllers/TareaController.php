@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarea;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class TareaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ver tareas', ['only' => ['index', 'show']]);
+        $this->middleware('permission:crear tareas', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar tareas', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar tareas', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +23,7 @@ class TareaController extends Controller
     public function index()
     {
         $tareas = Tarea::all();
+
         return view('tarea.index', compact('tareas'));
     }
 
@@ -32,19 +40,18 @@ class TareaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         Tarea::create($request->only('titulo'));
+
         return redirect('/tareas');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
     public function show(Tarea $tarea)
@@ -55,7 +62,6 @@ class TareaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
     public function edit(Tarea $tarea)
@@ -66,25 +72,24 @@ class TareaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Tarea $tarea)
     {
         $tarea->update($request->only('titulo', 'completada'));
+
         return redirect('/tareas');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tarea $tarea)
     {
         $tarea->delete();
+
         return redirect('/tareas');
     }
 }

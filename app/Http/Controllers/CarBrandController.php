@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarBrand;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarBrandRequest;
 use App\Http\Requests\UpdateCarBrandRequest;
+use App\Models\CarBrand;
 
 class CarBrandController extends Controller
 {
@@ -32,7 +31,6 @@ class CarBrandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCarBrandRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCarBrandRequest $request)
@@ -43,7 +41,6 @@ class CarBrandController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CarBrand  $carBrand
      * @return \Illuminate\Http\Response
      */
     public function show(CarBrand $carBrand)
@@ -54,7 +51,6 @@ class CarBrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CarBrand  $carBrand
      * @return \Illuminate\Http\Response
      */
     public function edit(CarBrand $carBrand)
@@ -65,8 +61,6 @@ class CarBrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCarBrandRequest  $request
-     * @param  \App\Models\CarBrand  $carBrand
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCarBrandRequest $request, CarBrand $carBrand)
@@ -77,7 +71,6 @@ class CarBrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CarBrand  $carBrand
      * @return \Illuminate\Http\Response
      */
     public function destroy(CarBrand $carBrand)

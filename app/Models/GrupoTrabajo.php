@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GrupoTrabajo extends Model
 {
     use HasFactory;
+
     protected $fillable = ['nombre', 'car_id'];
 
     // Relación 1 a 1 con auto
@@ -22,11 +23,11 @@ class GrupoTrabajo extends Model
         return $this->belongsToMany(User::class, 'grupo_trabajo_usuario');
     }
 
-    // Relación con tareas 
+    // Relación con tareas
     public function tareas()
     {
         return $this->belongsToMany(Tarea::class, 'servicios_asignados')
-                    ->withPivot(['cliente', 'costo_final', 'notas_cliente', 'estado'])
-                    ->withTimestamps();
+            ->withPivot(['cliente', 'costo_final', 'notas_cliente', 'estado'])
+            ->withTimestamps();
     }
 }

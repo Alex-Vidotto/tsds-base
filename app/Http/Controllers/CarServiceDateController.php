@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarServiceDate;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarServiceDateRequest;
 use App\Http\Requests\UpdateCarServiceDateRequest;
 use App\Models\Car;
 use App\Models\CarService;
-
+use App\Models\CarServiceDate;
 
 class CarServiceDateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ver fechas de mantenimiento', ['only' => ['index', 'show']]);
+        $this->middleware('permission:crear fechas de mantenimiento', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar fechas de mantenimiento', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar fechas de mantenimiento', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +25,9 @@ class CarServiceDateController extends Controller
      */
     public function index()
     {
-        //$carservicedates = CarServiceDate::with('car.carService')->get();
+        // $carservicedates = CarServiceDate::with('car.carService')->get();
         $carservicedates = CarServiceDate::whereDate('fecha_mantenimiento', '>=', today())->get();
+
         return view('carservicedates.index', compact('carservicedates'));
     }
 
@@ -41,20 +48,19 @@ class CarServiceDateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCarServiceDateRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCarServiceDateRequest $request)
     {
-        
+
         $validated = $request->validated();
         CarServiceDate::create($validated);
 
         $car = Car::find($validated['car_id']);
-            if ($car) {
-                $car->estado = 'En mantenimiento'; 
-                $car->save();
-            }
+        if ($car) {
+            $car->estado = 'En mantenimiento';
+            $car->save();
+        }
 
         return redirect()->route('carservicedates.index')->with('success', 'Mantenimiento creado exitosamente.');
     }
@@ -62,7 +68,6 @@ class CarServiceDateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CarServiceDate  $carServiceDate
      * @return \Illuminate\Http\Response
      */
     public function show(CarServiceDate $carServiceDate)
@@ -73,34 +78,31 @@ class CarServiceDateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CarServiceDate  $carServiceDate
      * @return \Illuminate\Http\Response
      */
     public function edit(CarServiceDate $carServiceDate)
     {
         $cars = Car::all();
         $carServices = CarService::all();
-        
+
         return view('carservicedates.edit', compact('carServiceDate', 'cars', 'carServices'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCarServiceDateRequest  $request
-     * @param  \App\Models\CarServiceDate  $carServiceDate
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCarServiceDateRequest $request, CarServiceDate $carServiceDate)
     {
         $validated = $request->validated();
-        
+
         // Guardar el estado anterior para comparar
         $carIdAnterior = $carServiceDate->car_id;
-        
+
         // Actualizar el mantenimiento
         $carServiceDate->update($validated);
-        
+
         // Actualizar estado del carro actual
         $carActual = $carServiceDate->car;
         if ($carActual) {
@@ -123,7 +125,6 @@ class CarServiceDateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CarServiceDate  $carServiceDate
      * @return \Illuminate\Http\Response
      */
     public function destroy(CarServiceDate $carServiceDate)

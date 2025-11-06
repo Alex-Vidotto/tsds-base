@@ -24,5 +24,4 @@ class FichaTecnica extends Model
     {
         return $this->belongsTo(Car::class);
     }
-    
 }

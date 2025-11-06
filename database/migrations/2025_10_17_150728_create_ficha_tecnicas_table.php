@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-    Schema::create('ficha_tecnica', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('car_id')->constrained()->onDelete('cascade');
-        $table->string('motor')->nullable();
-        $table->string('combustible')->nullable();
-        $table->string('transmision')->nullable();
-        $table->string('color')->nullable();
-        $table->year('anio')->nullable();
-        $table->timestamps();
-    });
+        Schema::create('ficha_tecnica', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('car_id')->constrained()->onDelete('cascade');
+            $table->string('motor')->nullable();
+            $table->string('combustible')->nullable();
+            $table->string('transmision')->nullable();
+            $table->string('color')->nullable();
+            $table->year('anio')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

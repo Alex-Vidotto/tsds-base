@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
+use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -32,7 +31,6 @@ class CategoriaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategoriaRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategoriaRequest $request)
@@ -43,7 +41,6 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function show(Categoria $categoria)
@@ -54,7 +51,6 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function edit(Categoria $categoria)
@@ -65,8 +61,6 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCategoriaRequest  $request
-     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
@@ -77,7 +71,6 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function destroy(Categoria $categoria)

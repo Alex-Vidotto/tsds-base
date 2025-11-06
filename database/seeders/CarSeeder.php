@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Car;
 use App\Models\FichaTecnica;
+use Illuminate\Database\Seeder;
 
 class CarSeeder extends Seeder
 {
@@ -18,25 +17,25 @@ class CarSeeder extends Seeder
     {
         $car1 = Car::firstOrCreate([
             'matricula' => 'AR123BC',
-            'car_model_id' => 1 // Kangoo
+            'car_model_id' => 1, // Kangoo
         ]);
 
         $car2 = Car::firstOrCreate([
             'matricula' => 'AR456DE',
-            'car_model_id' => 2 // Partner
+            'car_model_id' => 2, // Partner
         ]);
 
         $car3 = Car::firstOrCreate([
             'matricula' => 'AR789FG',
-            'car_model_id' => 3 // Expert
+            'car_model_id' => 3, // Expert
         ]);
 
         $car4 = Car::firstOrCreate([
             'matricula' => 'AR321HI',
-            'car_model_id' => 1 // Kangoo
+            'car_model_id' => 1, // Kangoo
         ]);
 
-        // Fichas técnicas 
+        // Fichas técnicas
         FichaTecnica::firstOrCreate([
             'car_id' => $car1->id,
         ], [

@@ -24,12 +24,12 @@ class UpdateGrupoTrabajoRequest extends FormRequest
     public function rules()
     {
         return [
-//            'nombre' => 'required|string|max:255',
-//            'car_id' => [
-//                'nullable',
-//                'exists:cars,id',
-//                Rule::unique('grupo_trabajos', 'car_id')->ignore($this->grupo_trabajo),
-//            ],
+            //            'nombre' => 'required|string|max:255',
+            //            'car_id' => [
+            //                'nullable',
+            //                'exists:cars,id',
+            //                Rule::unique('grupo_trabajos', 'car_id')->ignore($this->grupo_trabajo),
+            //            ],
         ];
     }
 }

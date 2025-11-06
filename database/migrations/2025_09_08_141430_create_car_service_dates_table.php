@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->date('fecha_mantenimiento');
             $table->foreignID('car_id')
-                    ->constrained('cars')
-                    ->onDelete('cascade');
+                ->constrained('cars')
+                ->onDelete('cascade');
             $table->foreignID('car_service_id')
-                    ->constrained('car_services')
-                    ->onDelete('cascade');
+                ->constrained('car_services')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

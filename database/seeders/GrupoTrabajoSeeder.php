@@ -2,12 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\GrupoTrabajo;
 use App\Models\Car;
-use App\Models\User;
+use App\Models\GrupoTrabajo;
 use App\Models\Tarea;
+use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class GrupoTrabajoSeeder extends Seeder
 {
@@ -41,9 +40,9 @@ class GrupoTrabajoSeeder extends Seeder
         $tareas = Tarea::all();
         foreach ($tareas as $tarea) {
             $grupo->tareas()->attach($tarea->id, [
-                'cliente' => 'Cliente de ' . $tarea->titulo,
+                'cliente' => 'Cliente de '.$tarea->titulo,
                 'costo_final' => rand(1000, 3000),
-                'notas_cliente' => 'Notas para ' . $tarea->titulo,
+                'notas_cliente' => 'Notas para '.$tarea->titulo,
                 'estado' => 'pendiente',
             ]);
         }

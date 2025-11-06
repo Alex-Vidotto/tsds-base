@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarService;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCarServiceRequest;
 use App\Http\Requests\UpdateCarServiceRequest;
+use App\Models\CarService;
 
 class CarServiceController extends Controller
 {
@@ -32,7 +31,6 @@ class CarServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCarServiceRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCarServiceRequest $request)
@@ -43,7 +41,6 @@ class CarServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CarService  $carService
      * @return \Illuminate\Http\Response
      */
     public function show(CarService $carService)
@@ -54,7 +51,6 @@ class CarServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CarService  $carService
      * @return \Illuminate\Http\Response
      */
     public function edit(CarService $carService)
@@ -65,8 +61,6 @@ class CarServiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCarServiceRequest  $request
-     * @param  \App\Models\CarService  $carService
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCarServiceRequest $request, CarService $carService)
@@ -77,7 +71,6 @@ class CarServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CarService  $carService
      * @return \Illuminate\Http\Response
      */
     public function destroy(CarService $carService)
