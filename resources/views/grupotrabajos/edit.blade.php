@@ -15,7 +15,7 @@
         <div class="col-lg-8">
             <div class="card shadow-sm border-0">
                 <div class="card-body">
-                   <form action="{{ route('grupotrabajos.update', ['grupotrabajo' => $grupoTrabajo->id]) }}" method="POST">
+                   <form action="{{ route('grupotrabajos.update', ['grupotrabajo' => $grupoTrabajo]) }}" method="POST">
                         @csrf
                         @method('PUT')
 
