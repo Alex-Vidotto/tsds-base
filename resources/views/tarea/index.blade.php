@@ -28,15 +28,23 @@
                                     <td>{{ $tarea->id }}</td>
                                     <td>{{ $tarea->titulo }}</td>
                                     <td>
-                                        <a href = "{{ route('tareas.edit', $tarea->id) }}" class = "btn btn-warning btn-sm">Editar</a>
-                                            <form action = "{{ route('tareas.destroy' , $tarea->id) }}" method = "POST" style = "display:inline-block;">
-                                                @csrf
-                                                @method ('DELETE')
-                                                <button type = "submit" class = "btn btn-danger btn-sm" onclick = "return confirm('¿Estas seguro de eliminar esta tarea')">
-                                                    Eliminar
-                                                </button>
-                                            </form>
-                                        </a>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="dropdownMenuButton-{{ $tarea->id }}" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-cog"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton-{{ $tarea->id }}">
+                                                <li><a class="dropdown-item" href="{{ route('tareas.show', $tarea->id) }}"><i class="fas fa-eye me-2"></i>Ver</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('tareas.edit', $tarea->id) }}"><i class="fas fa-edit me-2"></i>Editar</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <form action="{{ route('tareas.destroy', $tarea->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar la tarea {{ $tarea->titulo }}?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="dropdown-item text-danger"><i class="fas fa-trash-alt me-2"></i>Eliminar</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

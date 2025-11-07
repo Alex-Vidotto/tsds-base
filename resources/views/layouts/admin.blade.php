@@ -330,7 +330,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 
-<script src="{{asset('plugins/jquery/jquery.js')}}"></script>
+
 
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 

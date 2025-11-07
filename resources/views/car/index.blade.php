@@ -69,21 +69,23 @@
                             </td>
                             <td>{{ $car->created_at?->format('d/m/Y') ?? '—' }}</td>
                             <td class="text-end pe-3">
-                                <a href="{{ route('cars.edit', $car->id) }}" 
-                                   class="btn btn-warning btn-sm" 
-                                   title="Editar">
-                                    <i class="fas fa-edit fa-xs"></i>
-                                </a>
-                                <form action="{{ route('cars.destroy', $car->id) }}" 
-                                      method="POST" 
-                                      class="d-inline"
-                                      onsubmit="return confirm('¿Estás seguro de eliminar este vehículo?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar">
-                                        <i class="fas fa-trash fa-xs"></i>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-info dropdown-toggle" type="button" id="dropdownMenuButton-{{ $car->id }}" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-cog"></i>
                                     </button>
-                                </form>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton-{{ $car->id }}">
+                                        <li><a class="dropdown-item" href="{{ route('cars.show', $car->id) }}"><i class="fas fa-eye me-2"></i>Ver</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('cars.edit', $car->id) }}"><i class="fas fa-edit me-2"></i>Editar</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form action="{{ route('cars.destroy', $car->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar el vehículo {{ $car->matricula }}?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger"><i class="fas fa-trash-alt me-2"></i>Eliminar</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                         @empty
