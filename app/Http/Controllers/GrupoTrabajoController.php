@@ -90,16 +90,22 @@ class GrupoTrabajoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-        public function edit($id)
-        {
-            $grupoTrabajo = GrupoTrabajo::findOrFail($id);
-                    $autos = Car::whereDoesntHave('grupoTrabajo')->orWhere('id', $grupoTrabajo->car_id)->get();
-            $empleados = User::role('empleado')
-                ->whereDoesntHave('grupoTrabajo')
-                ->get();
+    public function edit($id)
+    {
+    $grupoTrabajo = GrupoTrabajo::findOrFail($id);
+    $autos = Car::whereDoesntHave('grupoTrabajo')->orWhere('id', $grupoTrabajo->car_id)->get();
     
-            return view('grupotrabajos.edit', compact('grupoTrabajo', 'autos', 'empleados'));
-        }
+    // Incluir empleados que ya están en ESTE grupo + disponibles
+    $empleados = User::role('empleado')
+        ->where(function($query) use ($grupoTrabajo) {
+            $query->whereDoesntHave('grupoTrabajo')
+                  ->orWhereHas('grupoTrabajo', function($q) use ($grupoTrabajo) {
+                      $q->where('grupo_trabajos.id', $grupoTrabajo->id);
+                  });
+        })
+        ->get();
+
+    return view('grupotrabajos.edit', compact('grupoTrabajo', 'autos', 'empleados'));    }
 
     /**
      * Update the specified resource in storage.
@@ -109,14 +115,25 @@ class GrupoTrabajoController extends Controller
     public function update(UpdateGrupoTrabajoRequest $request, $id)
     {
         $grupoTrabajo = GrupoTrabajo::findOrFail($id);
+    
         $request->validate([
             'nombre' => 'required|string|max:255',
             'car_id' => 'nullable|exists:cars,id',
             'empleados' => 'nullable|array',
+            'empleados.*' => 'exists:users,id' // Validar cada empleado
         ]);
-
+    
+        // Actualizar campos directos
         $grupoTrabajo->update($request->only('nombre', 'car_id'));
-
+    
+        // SINCRONIZAR la relación muchos a muchos con empleados
+        if ($request->has('empleados')) {
+            $grupoTrabajo->empleados()->sync($request->empleados);
+        } else {
+            // Si no se enviaron empleados, eliminar todos
+            $grupoTrabajo->empleados()->sync([]);
+        }
+    
         return redirect()->route('grupotrabajos.index')->with('success', 'Grupo actualizado correctamente.');
     }
 

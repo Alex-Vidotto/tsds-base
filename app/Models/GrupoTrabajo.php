@@ -20,7 +20,7 @@ class GrupoTrabajo extends Model
     // Relación 1 a muchos con empleados
     public function empleados()
     {
-        return $this->belongsToMany(User::class, 'grupo_trabajo_usuario');
+        return $this->belongsToMany(User::class, 'grupo_trabajo_usuario', 'grupo_trabajo_id', 'user_id');
     }
 
     // Relación con tareas

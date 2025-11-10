@@ -46,20 +46,21 @@
 
                         <!-- Integrantes -->
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Integrantes del Grupo</label>
-                            <div class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
-                                @foreach($empleados as $empleado)
-                                    <div class="form-check">
-                                        <input type="checkbox" name="empleados[]" 
-                                               value="{{ $empleado->id }}" 
-                                               id="empleado_{{ $empleado->id }}"
-                                               class="form-check-input"
-                                               {{ in_array($empleado->id, $grupoTrabajo->empleados->pluck('id')->toArray()) ? 'checked' : '' }}>
-                                        <label for="empleado_{{ $empleado->id }}" class="form-check-label">
-                                            {{ $empleado->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
+                                <label class="form-label fw-semibold">Integrantes del Grupo</label>
+                                <div class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
+                                    @foreach($empleados as $empleado)
+                                        <div class="form-check">
+                                            <input type="checkbox" name="empleados[]" 
+                                                   value="{{ $empleado->id }}" 
+                                                   id="empleado_{{ $empleado->id }}"
+                                                   class="form-check-input"
+                                                   {{ in_array($empleado->id, $grupoTrabajo->empleados->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                            <label for="empleado_{{ $empleado->id }}" class="form-check-label">
+                                                {{ $empleado->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
 
