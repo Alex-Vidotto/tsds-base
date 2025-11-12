@@ -13,43 +13,19 @@
 
   <!-- Fila de cajas -->
   <div class="row">
-  <!-- Grupos de trabajos -->
-<div class="col-lg-3 col-6">
-  <div class="small-box bg-info">
-    <div class="inner">
-      <h3>5</h3>
-      <p>Grupos de trabajos</p>
-    </div>
-    <div class="icon">
-      <i class="fas fa-users"></i>
-    </div>
-  </div>
-</div>
-
-
-    <!-- Stock -->
+    <!-- Grupos de trabajos -->
     <div class="col-lg-3 col-6">
-      <div class="small-box bg-warning">
+      <div class="small-box bg-info">
         <div class="inner">
-          <h3>3</h3>
-          <p>Notificaciones de Stock</p>
+          <h3>{{ $grupoTrabajoCount }}</h3>
+          <p>Grupos de trabajos</p>
         </div>
         <div class="icon">
-          <i class="fas fa-boxes"></i>
+          <i class="fas fa-users"></i>
         </div>
-      </div>
-    </div>
-
-    <!-- Órdenes de trabajo -->
-    <div class="col-lg-3 col-6">
-      <div class="small-box bg-success">
-        <div class="inner">
-          <h3>8</h3>
-          <p>Órdenes de trabajo activas</p>
-        </div>
-        <div class="icon">
-          <i class="fas fa-file-alt"></i>
-        </div>
+        <a href="{{ route('grupotrabajos.index') }}" class="small-box-footer">
+          Más información <i class="fas fa-arrow-circle-right"></i>
+        </a>
       </div>
     </div>
 
@@ -57,12 +33,47 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-primary">
         <div class="inner">
-          <h3>4</h3>
+          <h3>{{ $carCount }}</h3>
           <p>Vehículos disponibles</p>
         </div>
         <div class="icon">
           <i class="fas fa-truck"></i>
         </div>
+        <a href="{{ route('cars.index') }}" class="small-box-footer">
+          Más información <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Usuarios -->
+    <div class="col-lg-3 col-6">
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{{ $userCount }}</h3>
+          <p>Usuarios registrados</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <a href="{{ route('users.index') }}" class="small-box-footer">
+          Más información <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Servicios -->
+    <div class="col-lg-3 col-6">
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{{ $carServiceCount }}</h3>
+          <p>Servicios programados</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-wrench"></i>
+        </div>
+        <a href="{{ route('carservicedates.index') }}" class="small-box-footer">
+          Más información <i class="fas fa-arrow-circle-right"></i>
+        </a>
       </div>
     </div>
   </div>

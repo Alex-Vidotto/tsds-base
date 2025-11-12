@@ -79,100 +79,10 @@
         </div>
       </li>
 
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  aRZAMENDIA
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
-      </li>
-      <li class="nav-item">
-        <button id="dark-mode-toggle" class="btn btn-dark btn-sm" title="Dark Mode">
-            <i class="fas fa-moon"></i>
-        </button>
       </li>
     </ul>
   </nav>
@@ -242,125 +152,304 @@
 
                 <li class="nav-header">CONFIGURACIÓN</li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>Parámetros</p>
-                    </a>
-                </li>
-            </ul>
-            <li class="nav-item text-center">
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="nav-link btn btn-link p-0" style="color: #f9f7f7ff;">
-                        <i class="fas fa-sign-out-alt"></i> Salir
-                    </button>
-                </form>
-            </li>
-        </nav>
-        <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-</aside>
+                                                                <li class="nav-item has-treeview">
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <br>
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid"> 
-          
+                                                                    <a href="#" class="nav-link">
 
+                                                                        <i class="nav-icon fas fa-cog"></i>
 
-         
-                  @yield('content')	
+                                                                        <p>
 
-     
-      
-      </div>
-      </section>
-       <!-- /.content-wrapper -->
+                                                                            Parámetros
 
+                                                                            <i class="right fas fa-angle-left"></i>
 
+                                                                        </p>
 
+                                                                    </a>
 
+                                                                    <ul class="nav nav-treeview">
 
+                                                                        <li class="nav-item">
 
+                                                                            <a href="#" class="nav-link" id="sidebar-dark-mode-toggle">
 
+                                                                                <i class="far fa-circle nav-icon"></i>
 
+                                                                                <p>Modo Dark</p>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+                                                                            </a>
 
-<!-- jQuery -->
-<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap -->
-<script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
-<!-- daterangepicker -->
-<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- Summernote -->
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- overlayScrollbars -->
-<script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('dist/js/adminlte.js')}}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+                                                                        </li>
 
+                                                                        <li class="nav-item">
 
+                                                                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
 
-<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+                                                                                @csrf
 
-<!-- agregamos estido al paginate de Jquery DataTable -->
-<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+                                                                                <button type="submit" class="nav-link btn btn-link p-0" style="color: #c2c7d0; width: 100%; text-align: left;">
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                                                                                    <i class="far fa-circle nav-icon"></i>
 
-<script>
-    // Aplicar modo oscuro si está guardado
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-        document.querySelectorAll('.navbar, .card').forEach(el => el.classList.add('dark-mode'));
-    }
+                                                                                    <p>Salir</p>
 
-    // Toggle al hacer clic
-    document.getElementById('dark-mode-toggle').addEventListener('click', function () {
-        document.body.classList.toggle('dark-mode');
-        document.querySelectorAll('.navbar, .card').forEach(el => el.classList.toggle('dark-mode'));
+                                                                                </button>
 
-        // Guardar preferencia
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
-        }
-    });
-</script>
+                                                                            </form>
 
-@stack('scripts')
+                                                                        </li>
 
-</body>
-</html>
+                                                                    </ul>
+
+                                                                </li>
+
+                                                            </ul>
+
+                                                        </nav>
+
+                                                        <!-- /.sidebar-menu -->
+
+                                                    </div>
+
+                                                    <!-- /.sidebar -->
+
+                                                </aside>
+
+                                                
+
+                                                  <!-- Content Wrapper. Contains page content -->
+
+                                                  <div class="content-wrapper">
+
+                                                    <br>
+
+                                                    <!-- Main content -->
+
+                                                    <section class="content">
+
+                                                      <div class="container-fluid"> 
+
+                                                          
+
+                                                
+
+                                                
+
+                                                         
+
+                                                                  @yield('content')	
+
+                                                
+
+                                                     
+
+                                                      
+
+                                                      </div>
+
+                                                      </section>
+
+                                                       <!-- /.content-wrapper -->
+
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                
+
+                                                    <!-- Control Sidebar -->
+
+                                                    <aside class="control-sidebar control-sidebar-dark">
+
+                                                      <!-- Control sidebar content goes here -->
+
+                                                    </aside>
+
+                                                    <!-- /.control-sidebar -->
+
+                                                </div>
+
+                                                <!-- ./wrapper -->
+
+                                                
+
+                                                <!-- jQuery -->
+
+                                                <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+                                                <!-- jQuery UI 1.11.4 -->
+
+                                                <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+
+                                                <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+                                                <script>
+
+                                                  $.widget.bridge('uibutton', $.ui.button)
+
+                                                </script>
+
+                                                <!-- Bootstrap 4 -->
+
+                                                <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+                                                <!-- ChartJS -->
+
+                                                <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
+
+                                                <!-- Sparkline -->
+
+                                                <script src="{{asset('plugins/sparklines/sparkline.js')}}"></script>
+
+                                                <!-- JQVMap -->
+
+                                                <script src="{{asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+
+                                                <script src="{{asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+
+                                                <!-- jQuery Knob Chart -->
+
+                                                <script src="{{asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+
+                                                <!-- daterangepicker -->
+
+                                                <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
+
+                                                <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+
+                                                <!-- Tempusdominus Bootstrap 4 -->
+
+                                                <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+
+                                                <!-- Summernote -->
+
+                                                <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+
+                                                <!-- overlayScrollbars -->
+
+                                                <script src="{{asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+
+                                                <!-- AdminLTE App -->
+
+                                                <script src="{{asset('dist/js/adminlte.js')}}"></script>
+
+                                                <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+
+                                                <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+
+                                                
+
+                                                
+
+                                                
+
+                                                <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+
+                                                
+
+                                                <!-- agregamos estido al paginate de Jquery DataTable -->
+
+                                                <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+
+                                                
+
+                                                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+                                                
+
+                                                <script>
+
+                                                    // Aplicar modo oscuro si está guardado
+
+                                                    if (localStorage.getItem('darkMode') === 'enabled') {
+
+                                                        document.body.classList.add('dark-mode');
+
+                                                        document.querySelectorAll('.navbar, .card').forEach(el => el.classList.add('dark-mode'));
+
+                                                    }
+
+                                                
+
+                                                    // Toggle al hacer clic en el botón de la barra de navegación
+
+                                                    document.getElementById('dark-mode-toggle').addEventListener('click', function () {
+
+                                                        document.body.classList.toggle('dark-mode');
+
+                                                        document.querySelectorAll('.navbar, .card').forEach(el => el.classList.toggle('dark-mode'));
+
+                                                
+
+                                                        // Guardar preferencia
+
+                                                        if (document.body.classList.contains('dark-mode')) {
+
+                                                            localStorage.setItem('darkMode', 'enabled');
+
+                                                        } else {
+
+                                                            localStorage.setItem('darkMode', 'disabled');
+
+                                                        }
+
+                                                    });
+
+                                                
+
+                                                    // Toggle al hacer clic en el botón del sidebar
+
+                                                    document.getElementById('sidebar-dark-mode-toggle').addEventListener('click', function (e) {
+
+                                                        e.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+
+                                                        document.body.classList.toggle('dark-mode');
+
+                                                        document.querySelectorAll('.navbar, .card').forEach(el => el.classList.toggle('dark-mode'));
+
+                                                
+
+                                                        // Guardar preferencia
+
+                                                        if (document.body.classList.contains('dark-mode')) {
+
+                                                            localStorage.setItem('darkMode', 'enabled');
+
+                                                        } else {
+
+                                                            localStorage.setItem('darkMode', 'disabled');
+
+                                                        }
+
+                                                    });
+
+                                                </script>
+
+                                                
+
+                                                @stack('scripts')
+
+                                                
+
+                                                </body>
+
+                                                </html>
+
+                                                
+
+                                
+
+                
