@@ -66,6 +66,17 @@
                             <label for="foto" class="form-label font-weight-bold">
                                 <i class="fas fa-camera mr-1 text-primary"></i> Foto del Vehículo
                             </label>
+                            
+                            <!-- CONTENEDOR PARA LA VISTA PREVIA -->
+                            <div id="preview-container" class="mb-2" style="display: none;">
+                                <img id="preview-image" src="" alt="Vista previa" 
+                                     class="img-thumbnail" 
+                                     style="width: 150px; height: 150px; object-fit: cover;">
+                                <br>
+                                <small>Vista previa de la imagen</small>
+                            </div>
+                            <!-- FIN CONTENEDOR -->
+                            
                             <input
                                 type="file"
                                 name="foto"
@@ -159,4 +170,28 @@
         </div>
     </div>
 </div>
+
+<!-- SCRIPT PARA VISTA PREVIA -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#foto').change(function() {
+        const file = this.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                $('#preview-image').attr('src', e.target.result);
+                $('#preview-container').show();
+            }
+            
+            reader.readAsDataURL(file);
+        } else {
+            $('#preview-container').hide();
+            $('#preview-image').attr('src', '');
+        }
+    });
+});
+</script>
 @endsection

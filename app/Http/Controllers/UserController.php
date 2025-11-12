@@ -17,7 +17,6 @@ class UserController extends Controller
         $this->middleware('permission:borrar usuario', ['only' => ['destroy']]);
     }
 
-    // Mostrar listado de usuarios
     public function index()
     {
         $users = User::all();
@@ -25,7 +24,6 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    // Mostrar formulario para crear usuario
     public function create()
     {
         $roles = Role::all();
@@ -33,7 +31,6 @@ class UserController extends Controller
         return view('users.create', compact('roles'));
     }
 
-    // Guardar usuario
     public function store(Request $request)
     {
         $request->validate([
@@ -49,19 +46,16 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Asignar rol
         $user->assignRole($request->rol);
 
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
     }
 
-    // Mostrar usuario (opcional)
     public function show(User $user)
     {
         return view('users.show', compact('user'));
     }
 
-    // Formulario para editar usuario
     public function edit(User $user)
     {
         $roles = Role::all();
@@ -69,13 +63,13 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'roles'));
     }
 
-    // Actualizar usuario
     public function update(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => "required|email|unique:users,email,{$user->id}",
             'password' => 'nullable|string|min:6|confirmed',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rol' => 'required|exists:roles,name',
         ]);
 
@@ -85,16 +79,23 @@ class UserController extends Controller
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
+        if ($request->hasFile('foto')) {
+
+            if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+                Storage::disk('public')->delete($user->foto);
+            }
+
+            $fotoPath = $request->file('foto')->store('profiles', 'public');
+            $user->foto = $fotoPath;
+        }
 
         $user->save();
 
-        // Sincronizar rol
         $user->syncRoles([$request->rol]);
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
     }
 
-    // Eliminar usuario
     public function destroy(User $user)
     {
         $user->delete();

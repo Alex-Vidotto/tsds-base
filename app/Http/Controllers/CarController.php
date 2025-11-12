@@ -92,12 +92,12 @@ class CarController extends Controller
         $vehiculo->car_model_id = $request->car_model_id;
 
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $file->move(public_path().'/images/vehiculos/', $file->getClientOriginalName());
-
-            $vehiculo->foto = $file->getClientOriginalName();
+            $ruta = $request->file('foto')->store('imagenes/vehiculos', 'public');
+            $vehiculo->foto = $ruta; // Guarda la ruta completa en el disco público
         }
+
         $vehiculo->save();
+
         $vehiculo->fichaTecnica()->create([
             'motor' => $request->motor,
             'combustible' => $request->combustible,
@@ -107,7 +107,6 @@ class CarController extends Controller
         ]);
 
         return redirect()->route('cars.index')->with('success', 'Coche creado con éxito.');
-
     }
 
     /**
@@ -117,7 +116,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        return redirect()->route('cars.index');
+        return view('car.show', compact('car'));
     }
 
     /**
@@ -141,15 +140,19 @@ class CarController extends Controller
     {
         $car->matricula = $request->matricula;
         $car->car_model_id = $request->car_model_id;
-
+    
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $file->move(public_path().'/images/vehiculos/', $file->getClientOriginalName());
-
-            $car->foto = $file->getClientOriginalName();
+            // Opcional: Eliminar imagen anterior si existe
+            if ($car->foto) {
+                Storage::disk('public')->delete($car->foto);
+            }
+            
+            $ruta = $request->file('foto')->store('imagenes/vehiculos', 'public');
+            $car->foto = $ruta;
         }
+        
         $car->save();
-
+    
         return redirect()->route('cars.index')->with('success', 'Coche actualizado con éxito.');
     }
 

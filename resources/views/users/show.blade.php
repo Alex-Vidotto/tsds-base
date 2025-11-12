@@ -13,12 +13,20 @@
                     <!-- Información Básica -->
                     <div class="row mb-4">
                         <div class="col-md-4 text-center mb-3">
-                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                 style="width: 100px; height: 100px;">
-                                <span class="text-white fw-bold fs-4">
-                                    {{ strtoupper(substr($user->name, 0, 2)) }}
-                                </span>
-                            </div>
+                            @if($user->foto)
+                                <img src="{{ asset('storage/' . $user->foto) }}" 
+                                     alt="Foto de perfil de {{ $user->name }}" 
+                                     class="rounded-circle img-thumbnail"
+                                     style="width: 100px; height: 100px; object-fit: cover;">
+                            @else
+                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                     style="width: 100px; height: 100px;">
+                                    <span class="text-white fw-bold fs-4">
+                                        {{ strtoupper(substr($user->name, 0, 2)) }}
+                                    </span>
+                                </div>
+                            @endif
+                            
                         </div>
                         <div class="col-md-8">
                             <h4 class="mb-3">{{ $user->name }}</h4>
@@ -62,6 +70,20 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td class="text-muted">Foto de perfil:</td>
+                                            <td>
+                                                @if($user->foto)
+                                                    <span class="badge bg-success">
+                                                        <i class="fas fa-check me-1"></i> Subida
+                                                    </span>
+                                                @else
+                                                    <span class="badge bg-secondary">
+                                                        <i class="fas fa-times me-1"></i> No subida
+                                                    </span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td class="text-muted">Estado:</td>
                                             <td>
                                                 <span class="badge bg-{{ $user->deleted_at ? 'danger' : 'success' }}">
@@ -102,25 +124,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Información Adicional (si tienes más campos) -->
-                    @if($user->profile) {{-- Si tienes un perfil relacionado --}}
-                    <div class="card mb-3">
-                        <div class="card-header bg-light">
-                            <h6 class="mb-0"><i class="fas fa-user me-2"></i>Información Adicional</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>Teléfono:</strong> {{ $user->profile->phone ?? 'No especificado' }}
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>Dirección:</strong> {{ $user->profile->address ?? 'No especificada' }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
 
                     <!-- Acciones -->
                     <div class="d-flex justify-content-between mt-4">
@@ -168,5 +171,57 @@
     .table-sm td {
         padding: 0.3rem 0;
     }
+    .img-thumbnail {
+        border: 3px solid #dee2e6;
+    }
 </style>
+@endsection
+
+@section('scripts')
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('fotoPreview');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const file = input.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.classList.remove('d-none');
+            if (avatarPreview) {
+                avatarPreview.classList.add('d-none');
+            }
+        }
+        
+        reader.readAsDataURL(file);
+    } else {
+        preview.classList.add('d-none');
+        if (avatarPreview) {
+            avatarPreview.classList.remove('d-none');
+        }
+    }
+}
+
+// Mostrar mensajes de éxito/error
+@if(session('success'))
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: '{{ session('success') }}',
+        timer: 3000,
+        showConfirmButton: false
+    });
+@endif
+
+@if(session('error'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: '{{ session('error') }}',
+        timer: 3000
+    });
+@endif
+</script>
 @endsection
